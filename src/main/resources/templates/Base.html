@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Título de tu página</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <!-- Agrega aquí cualquier otro estilo CSS que necesites -->
+</head>
+<body>
+<header th:fragment="header">
+    <div class="container">
+        <h1>Registro de Facturas</h1>
+    </div>
+</header>
+
+<nav>
+    <div class="container">
+        <ul>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/RegistrarClientes.html">Registrar Clientes</a></li>
+            <li><a href="/facturar">Facturar</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <!-- Por ejemplo: <h2 th:text="${tituloPagina}">Título de la Página</h2> -->
+</div>
+
+<footer th:fragment="footer">
+    <div class="container">
+        <p>&copy; 2024 Tu Empresa. Todos los derechos reservados.</p>
+    </div>
+</footer>
+</body>
+</html>

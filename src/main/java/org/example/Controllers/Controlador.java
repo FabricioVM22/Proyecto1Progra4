@@ -9,7 +9,7 @@ public class Controlador {
      @GetMapping("/")
      public String index(Model model){
          //aquí debería haber una conexion a la capa de logica que les traiga los datos por ejemplo de las facturas
-         Modelo modelo1 =new Modelo("Esta es la pagina de inicio de Spring Boot");
+         Modelo modelo1 =new Modelo("Esta es la pagina de inicio del sistema :D");
          model.addAttribute("modelo", modelo1);
          return "index";
      }

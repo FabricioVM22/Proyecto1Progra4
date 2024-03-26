@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:extends="Base">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenido/a!</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/styles.css}">
+</head>
+<body>
+<header th:replace="base::header"></header>
+
+<div class="container">
+    <h1>Bienvenido/a!</h1>
+    <!-- Esto hace que el contenido sea dinámico -->
+    <h2 th:text="${modelo.message}"></h2>
+</div>
+
+<nav th:replace="Base::nav"></nav>
+</body>
+</html>
