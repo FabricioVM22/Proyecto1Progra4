@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:extends="Base">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Clientes</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/styles.css}">
+</head>
+<body>
+<header th:replace="base::header"></header>
+
+<div class="container">
+    <h1>Lista de Clientes</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Cédula</th>
+            <th>Tipo de Cédula</th>
+            <th>Correo Electrónico</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Cliente 1 -->
+        <tr>
+            <td>Cliente A</td>
+            <td>123456789</td>
+            <td>Cédula Nacional</td>
+            <td>clienteA@example.com</td>
+        </tr>
+        <!-- Cliente 2 -->
+        <tr>
+            <td>Cliente B</td>
+            <td>987654321</td>
+            <td>Cédula Jurídica</td>
+            <td>clienteB@example.com</td>
+        </tr>
+        <!-- Cliente 3 -->
+        <tr>
+            <td>Cliente C</td>
+            <td>543216789</td>
+            <td>Cédula Nacional</td>
+            <td>clienteC@example.com</td>
+        </tr>
+        <!-- Cliente 4 -->
+        <tr>
+            <td>Cliente D</td>
+            <td>678945321</td>
+            <td>Cédula Jurídica</td>
+            <td>clienteD@example.com</td>
+        </tr>
+        <!-- Cliente 5 -->
+        <tr>
+            <td>Cliente E</td>
+            <td>987654123</td>
+            <td>Cédula Nacional</td>
+            <td>clienteE@example.com</td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- Botón para redirigir a la página de registro de clientes -->
+    <a th:href="@{/registrar-clientes}" class="button">Registrar Cliente</a>
+</div>
+
+<nav th:replace="Base::nav"></nav>
+<footer th:replace="base::footer"></footer>
+</body>
+</html>

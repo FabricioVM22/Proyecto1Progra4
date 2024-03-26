@@ -55,7 +55,19 @@ footer p {
     font-size: 14px;
 }
 
-/* Estilos específicos para la página de registrar clientes */
+/* Estilos para el botón */
+.button {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+
+/* Estilos del Form */
 form {
     background-color: #fff;
     border-radius: 5px;
@@ -90,4 +102,26 @@ form button[type="submit"] {
 
 form button[type="submit"]:hover {
     background-color: #666;
+}
+
+/*estilos de la tabla*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #333;
+    color: #fff;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
 }

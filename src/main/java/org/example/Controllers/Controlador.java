@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @org.springframework.stereotype.Controller
 public class Controlador {
+    /*paginas base*/
     @GetMapping("/")
     public String index(Model model) {
         //aquí debería haber una conexion a la capa de logica que les traiga los datos por ejemplo de las facturas
@@ -15,6 +16,21 @@ public class Controlador {
         return "index";
     }
 
+    @GetMapping("/Clientes")
+    public String Clientes(Model model) {
+        Modelo modeloC = new Modelo("esta es la pagina de vista de Clientes");
+        model.addAttribute("modelo", modeloC);
+        return "Clientes";
+    }
+
+    @GetMapping("/Facturas")
+    public String Facturas(Model model) {
+        Modelo modeloF = new Modelo("esta es la pagina de vista de Facturas");
+        model.addAttribute("modelo", modeloF);
+        return "Facturas";
+    }
+
+    /*forms*/
     @GetMapping("/RegistrarClientes")
     public String RegistrarCliente(Model model) {
         Modelo modeloRC = new Modelo("esta es la pagina de registro de Clientes");
@@ -29,7 +45,7 @@ public class Controlador {
         return "RegistrarFacturas";
     }
 
-
+    /*about*/
     @GetMapping("/about")
     public String about(Model model) {
         Modelo modelo = new Modelo("esta es la pagina de información");
