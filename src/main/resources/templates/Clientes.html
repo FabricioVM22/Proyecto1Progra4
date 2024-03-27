@@ -6,8 +6,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{/CSS/styles.css}">
 </head>
 <body>
-<header th:replace="base::header"></header>
-
+<header th:replace="Base :: header"></header>
+<nav th:replace="Base :: nav"></nav>
 <div class="container">
     <h1>Lista de Clientes</h1>
     <table>
@@ -60,8 +60,6 @@
     <!-- Botón para redirigir a la página de registro de clientes -->
     <a th:href="@{/RegistrarClientes}" class="button">Registrar Cliente</a>
 </div>
-
-<nav th:replace="Base::nav"></nav>
-<footer th:replace="base::footer"></footer>
+<footer th:replace="Base :: footer"></footer>
 </body>
 </html>

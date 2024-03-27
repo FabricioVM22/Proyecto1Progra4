@@ -6,14 +6,13 @@
     <link rel="stylesheet" type="text/css" th:href="@{/CSS/styles.css}">
 </head>
 <body>
-<header th:replace="base::header"></header>
-
+<header th:replace="Base :: header"></header>
+<nav th:replace="Base :: nav"></nav>
 <div class="container">
     <h1>Bienvenido/a!</h1>
     <!-- Esto hace que el contenido sea dinámico -->
     <h2 th:text="${modelo.message}"></h2>
 </div>
-
-<nav th:replace="Base::nav"></nav>
+<div th:replace="Base :: footer"></div>
 </body>
 </html>
