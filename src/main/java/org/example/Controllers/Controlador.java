@@ -35,7 +35,12 @@ public class Controlador {
         model.addAttribute("modelo", modeloP);
         return "Productos";
     }
-
+    @GetMapping("/Administracion")
+    public String Administracion(Model model) {
+        Modelo modeloA = new Modelo("esta es la pagina de administracion");
+        model.addAttribute("modelo", modeloA);
+        return "Administracion";
+    }
     /*forms*/
     @GetMapping("/RegistrarClientes")
     public String RegistrarCliente(Model model) {
@@ -56,7 +61,12 @@ public class Controlador {
         model.addAttribute("modelo", modeloRP);
         return "RegistrarProductos";
     }
-
+    @GetMapping("/AdministrarProveedores")
+    public String AdministrarProveedores(Model model) {
+        Modelo modeloAP = new Modelo("esta es la pagina de administracion de proveedores");
+        model.addAttribute("modelo", modeloAP);
+        return "AdministrarProveedores";
+    }
     /*about*/
     @GetMapping("/about")
     public String about(Model model) {

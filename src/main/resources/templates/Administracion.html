@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:extends="Base">
+<head>
+    <meta charset="UTF-8">
+    <title>Administracion</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/styles.css}">
+</head>
+<body>
+<header th:replace="Base :: header"></header>
+<nav th:replace="Base :: nav"></nav>
+<div class="container">
+    <h1>Lista de Proveedores</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Proveedor</th>
+            <th>Contraseña</th>
+            <th>Correo Electrónico</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Proveedor 1 -->
+        <tr>
+            <td>Proveedor A</td>
+            <td>QWERTY1234</td>
+            <td>clienteA@example.com</td>
+        </tr>
+        <!-- Proveedor 2 -->
+        <tr>
+            <td>Proveedor B</td>
+            <td>5225656</td>
+            <td>clienteB@example.com</td>
+        </tr>
+        <!-- Proveedor 3 -->
+        <tr>
+            <td>Proveedor C</td>
+            <td>20202425</td>
+            <td>clienteC@example.com</td>
+        </tr>
+        <!-- Proveedor 4 -->
+        <tr>
+            <td>Proveedor D</td>
+            <td>13141516</td>
+            <td>clienteD@example.com</td>
+        </tr>
+        <!-- Proveedor 5 -->
+        <tr>
+            <td>Proveedor E</td>
+            <td>123456$</td>
+            <td>clienteE@example.com</td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- Botón para redirigir a la página de registro de clientes -->
+    <a th:href="@{/AdministrarProveedores}" class="button">Administrar Proveedores</a>
+</div>
+<div th:replace="Base :: footer"></div>
+</body>
+</html>
