@@ -7,7 +7,7 @@
 </head>
 <body>
 <header th:replace="Base :: header"></header>
-
+<nav th:replace="Base :: nav"></nav>
 <div class="container">
     <h1>Generar Factura Electrónica</h1>
     <form action="#" method="post"> <!-- Reemplaza "#" con la acción correcta -->
@@ -23,8 +23,6 @@
         <button type="submit" class="button">Generar Factura</button>
     </form>
 </div>
-
-<nav th:replace="Base :: nav"></nav>
 <footer th:replace="Base :: footer"></footer>
 </body>
 </html>

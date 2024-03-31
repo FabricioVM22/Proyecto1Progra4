@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:extends="Base">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/styles.css}">
+</head>
+<body>
+<header th:replace="Base :: header"></header>
+<nav th:replace="Base :: nav"></nav>
+<div class="container">
+    <h1>Lista de Productos</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Número de Producto</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Producto 1 -->
+        <tr>
+            <td>001</td>
+            <td>Producto A</td>
+            <td>10</td>
+        </tr>
+        <!-- Producto 2 -->
+        <tr>
+            <td>002</td>
+            <td>Producto B</td>
+            <td>12</td>
+        </tr>
+        <!-- Producto 3 -->
+        <tr>
+            <td>003</td>
+            <td>Producto C</td>
+            <td>9</td>
+        </tr>
+        <!-- Producto 4 -->
+        <tr>
+            <td>004</td>
+            <td>Producto D</td>
+            <td>52</td>
+        </tr>
+        <!-- Producto 5 -->
+        <tr>
+            <td>005</td>
+            <td>Producto E</td>
+            <td>25</td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- Botón para redirigir a la página de registro de productos -->
+    <a th:href="@{/RegistrarProductos}" class="button">Registrar Producto</a>
+</div>
+<footer th:replace="Base :: footer"></footer>
+</body>
+</html>
+>

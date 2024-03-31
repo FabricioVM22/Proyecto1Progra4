@@ -29,6 +29,12 @@ public class Controlador {
         model.addAttribute("modelo", modeloF);
         return "Facturas";
     }
+    @GetMapping("/Productos")
+    public String Productos(Model model) {
+        Modelo modeloP = new Modelo("esta es la pagina de vista de Productos");
+        model.addAttribute("modelo", modeloP);
+        return "Productos";
+    }
 
     /*forms*/
     @GetMapping("/RegistrarClientes")
@@ -43,6 +49,12 @@ public class Controlador {
         Modelo modeloRF = new Modelo("esta es la pagina de información");
         model.addAttribute("modelo", modeloRF);
         return "RegistrarFacturas";
+    }
+    @GetMapping("/RegistrarProductos")
+    public String RegistrarProductos(Model model) {
+        Modelo modeloRP = new Modelo("esta es la pagina de información");
+        model.addAttribute("modelo", modeloRP);
+        return "RegistrarProductos";
     }
 
     /*about*/
