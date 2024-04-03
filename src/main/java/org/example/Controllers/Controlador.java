@@ -1,12 +1,110 @@
 package org.example.Controllers;
 
-import org.example.Models.Modelo;
+import org.example.Models.*;
+import org.example.repository.ClienteRepository;
+import org.example.repository.FacturaRepository;
+import org.example.repository.ProductoRepository;
+import org.example.repository.UsuarioRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 
-@org.springframework.stereotype.Controller
+@Controller
+@RequestMapping(path = "/")
 public class Controlador {
+    //Bases de datos para Usuarios
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+    @PostMapping(path="add")
+    public @ResponseBody String addNuevoUsuario(@RequestParam String nombre, @RequestParam String email){
+
+        Usuario nuevoUsuario = new Usuario();
+        nuevoUsuario.setNombre(nombre);
+        nuevoUsuario.setEmail(email);
+        usuarioRepository.save(nuevoUsuario);
+        return "Guardado! ";
+    }
+
+    @GetMapping(path = "list")
+    public String getAllUsers(Model model)
+    {
+        Iterable<Usuario> usuarios = usuarioRepository.findAll();
+        model.addAttribute("usuarios",usuarios);
+        return "Administracion";
+    }
+    //Bases de datos para Clientes
+    @Autowired
+    private ClienteRepository clienteRepository;
+    @PostMapping(path="add")
+    public @ResponseBody String addNuevoCliente(@RequestParam String nombre,@RequestParam String tipoCedula, @RequestParam String email){
+
+        Cliente nuevoCliente = new Cliente();
+        nuevoCliente.setNombre(nombre);
+        nuevoCliente.setTipoCedula(tipoCedula);
+        nuevoCliente.setEmail(email);
+        clienteRepository.save(nuevoCliente);
+        return "Guardado! ";
+    }
+
+    @GetMapping(path = "list")
+    public String getAllClientes(Model model)
+    {
+        Iterable<Cliente> clientes = clienteRepository.findAll();
+        model.addAttribute("clientes",clientes);
+        return "Clientes";
+    }
+    //Bases de datos para Facturas
+    @Autowired
+    private FacturaRepository facturaRepository;
+    @PostMapping(path="add")
+    public @ResponseBody String addNuevaFactura(@RequestParam String cliente, @RequestParam String email){
+
+        Factura nuevaFactura = new Factura();
+        nuevaFactura.setCliente(cliente);
+        nuevaFactura.setEmail(email);
+        facturaRepository.save(nuevaFactura);
+        return "Guardado! ";
+    }
+
+    @GetMapping(path = "list")
+    public String getAllFacturas(Model model)
+    {
+        Iterable<Factura> facturas = facturaRepository.findAll();
+        model.addAttribute("facturas",facturas);
+        return "Facturas";
+    }
+    //Bases de datos para Productos
+    @Autowired
+    private ProductoRepository productoRepository;
+    @PostMapping(path="add")
+    public @ResponseBody String addNuevoProducto(@RequestParam String descripcion, @RequestParam int cantidad){
+
+        Producto nuevoProducto = new Producto();
+        nuevoProducto.setDescripcion(descripcion);
+        nuevoProducto.setCantidad(cantidad);
+        facturaRepository.save(nuevoProducto);
+        return "Guardado! ";
+    }
+
+    @GetMapping(path = "list")
+    public String getAllProductos(Model model)
+    {
+        Iterable<Producto> productos = facturaRepository.findAll();
+        model.addAttribute("productos",productos);
+        return "Producto";
+    }
+
+
+
     /*paginas base*/
     @GetMapping("/")
     public String index(Model model) {

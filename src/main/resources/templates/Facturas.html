@@ -19,36 +19,12 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Factura 1 -->
-        <tr>
-            <td>001</td>
-            <td>Cliente A</td>
-            <td>clienteA@example.com</td>
+        <tr th:each="factura : ${facturas}">
+            <td th:text="${factura.numFactura}"></td>
+            <td th:text="${factura.cliente}"></td>
+            <td th:text="${factura.email}"></td>
         </tr>
-        <!-- Factura 2 -->
-        <tr>
-            <td>002</td>
-            <td>Cliente B</td>
-            <td>clienteB@example.com</td>
-        </tr>
-        <!-- Factura 3 -->
-        <tr>
-            <td>003</td>
-            <td>Cliente C</td>
-            <td>clienteC@example.com</td>
-        </tr>
-        <!-- Factura 4 -->
-        <tr>
-            <td>004</td>
-            <td>Cliente D</td>
-            <td>clienteD@example.com</td>
-        </tr>
-        <!-- Factura 5 -->
-        <tr>
-            <td>005</td>
-            <td>Cliente E</td>
-            <td>clienteE@example.com</td>
-        </tr>
+
         </tbody>
     </table>
     <!-- Botón para redirigir a la página de registro de facturas -->

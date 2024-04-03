@@ -11,73 +11,26 @@
 <div class="container">
     <h1>Lista de Proveedores</h1>
     <form action="#" method="post">
-    <table>
-        <thead>
-        <tr>
-            <th>Proveedor</th>
-            <th>Contraseña</th>
-            <th>Correo Electrónico</th>
-            <th>Estado de cuenta</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Proveedor 1 -->
-        <tr>
-            <td>Proveedor A</td>
-            <td>QWERTY1234</td>
-            <td>clienteA@example.com</td>
-            <td><select id="estadoProveedor1" name="estadoProveedor2" required>
-                <option value="Activa">Activa</option>
-                <option value="Desactiva">Desactiva</option>
-            </select>
-            </td>
-        </tr>
-        <!-- Proveedor 2 -->
-        <tr>
-            <td>Proveedor B</td>
-            <td>5225656</td>
-            <td>clienteB@example.com</td>
-            <td><select id="estadoProveedor2" name="estadoProveedor2" required>
-                <option value="Activa">Activa</option>
-                <option value="Desactiva">Desactiva</option>
-            </select>
-            </td>
-        </tr>
-        <!-- Proveedor 3 -->
-        <tr>
-            <td>Proveedor C</td>
-            <td>20202425</td>
-            <td>clienteC@example.com</td>
-            <td><select id="estadoProveedor3" name="estadoProveedor3" required>
-                <option value="Activa">Activa</option>
-                <option value="Desactiva">Desactiva</option>
-            </select>
-            </td>
-        </tr>
-        <!-- Proveedor 4 -->
-        <tr>
-            <td>Proveedor D</td>
-            <td>13141516</td>
-            <td>clienteD@example.com</td>
-            <td><select id="estadoProveedor4" name="estadoProveedor4" required>
-                <option value="Activa">Activa</option>
-                <option value="Desactiva">Desactiva</option>
-            </select>
-            </td>
-        </tr>
-        <!-- Proveedor 5 -->
-        <tr>
-            <td>Proveedor E</td>
-            <td>123456$</td>
-            <td>clienteE@example.com</td>
-            <td><select id="estadoProveedor5" name="estadoProveedor5" required>
-                <option value="Activa">Activa</option>
-                <option value="Desactiva">Desactiva</option>
-            </select>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Contraseña</th>
+                <th>Estado</th>
+            </tr>
+            <tr th:each="usuario : ${usuarios}">
+                <td th:text="${usuario.id}"></td>
+                <td th:text="${usuario.nombre}"></td>
+                <td th:text="${usuario.email}"></td>
+                <td th:text="${usuario.contrasena}"></td>
+                <td><select id="estadoUsuario" name="estadoUsuario" required>
+                    <option value="Activa">Activa</option>
+                    <option value="Desactiva">Desactiva</option>
+                </select>
+                </td>
+            </tr>
+        </table>
         <!-- Botón para Guardar cambios en la página de proveedores -->
         <button type="submit">Guardar Cambios</button>
     </form>

@@ -11,45 +11,18 @@
 <div class="container">
     <h1>Lista de Proveedores</h1>
     <table>
-        <thead>
         <tr>
-            <th>Proveedor</th>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
             <th>Contraseña</th>
-            <th>Correo Electrónico</th>
         </tr>
-        </thead>
-        <tbody>
-        <!-- Proveedor 1 -->
-        <tr>
-            <td>Proveedor A</td>
-            <td>QWERTY1234</td>
-            <td>clienteA@example.com</td>
+        <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.id}"></td>
+            <td th:text="${usuario.nombre}"></td>
+            <td th:text="${usuario.email}"></td>
+            <td th:text="${usuario.contrasena}"></td>
         </tr>
-        <!-- Proveedor 2 -->
-        <tr>
-            <td>Proveedor B</td>
-            <td>5225656</td>
-            <td>clienteB@example.com</td>
-        </tr>
-        <!-- Proveedor 3 -->
-        <tr>
-            <td>Proveedor C</td>
-            <td>20202425</td>
-            <td>clienteC@example.com</td>
-        </tr>
-        <!-- Proveedor 4 -->
-        <tr>
-            <td>Proveedor D</td>
-            <td>13141516</td>
-            <td>clienteD@example.com</td>
-        </tr>
-        <!-- Proveedor 5 -->
-        <tr>
-            <td>Proveedor E</td>
-            <td>123456$</td>
-            <td>clienteE@example.com</td>
-        </tr>
-        </tbody>
     </table>
     <!-- Botón para redirigir a la página de registro de clientes -->
     <a th:href="@{/AdministrarProveedores}" class="button">Administrar Proveedores</a>
