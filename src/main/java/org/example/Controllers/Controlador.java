@@ -185,5 +185,11 @@ public class Controlador {
         model.addAttribute("modelo", modelo);
         return "about";
     }
+    @GetMapping("/Perfil")
+    public String perfil(Model model) {
+        Modelo modelo = new Modelo("esta es la pagina de información");
+        model.addAttribute("modelo", modelo);
+        return "about";
+    }
 
 }

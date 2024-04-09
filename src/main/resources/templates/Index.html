@@ -8,6 +8,7 @@
 <body>
 <header th:replace="Base :: header"></header>
 <nav th:replace="Base :: nav"></nav>
+
 <div class="container">
     <h2>Login</h2>
     <form action="/login" method="post">
@@ -19,8 +20,8 @@
         <br><br>
         <input type="submit" value="Login">
     </form>
-
 </div>
+
 <div th:replace="Base :: footer"></div>
 </body>
 </html>
