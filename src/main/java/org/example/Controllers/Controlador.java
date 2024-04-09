@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(path = "/")
@@ -24,7 +25,7 @@ public class Controlador {
     //Bases de datos para Usuarios
     @Autowired
     private UsuarioRepository usuarioRepository;
-    @PostMapping(path="add")
+    @PostMapping(path="addUsuario")
     public @ResponseBody String addNuevoUsuario(@RequestParam String nombre, @RequestParam String email){
 
         Usuario nuevoUsuario = new Usuario();
@@ -34,7 +35,7 @@ public class Controlador {
         return "Guardado! ";
     }
 
-    @GetMapping(path = "list")
+    @GetMapping(path = "listUsuario")
     public String getAllUsers(Model model)
     {
         Iterable<Usuario> usuarios = usuarioRepository.findAll();
@@ -44,7 +45,7 @@ public class Controlador {
     //Bases de datos para Clientes
     @Autowired
     private ClienteRepository clienteRepository;
-    @PostMapping(path="add")
+    @PostMapping(path="addCliente")
     public @ResponseBody String addNuevoCliente(@RequestParam String nombre,@RequestParam String tipoCedula, @RequestParam String email){
 
         Cliente nuevoCliente = new Cliente();
@@ -55,7 +56,7 @@ public class Controlador {
         return "Guardado! ";
     }
 
-    @GetMapping(path = "list")
+    @GetMapping(path = "listCliente")
     public String getAllClientes(Model model)
     {
         Iterable<Cliente> clientes = clienteRepository.findAll();
@@ -65,7 +66,7 @@ public class Controlador {
     //Bases de datos para Facturas
     @Autowired
     private FacturaRepository facturaRepository;
-    @PostMapping(path="add")
+    @PostMapping(path="addFactura")
     public @ResponseBody String addNuevaFactura(@RequestParam String cliente, @RequestParam String email){
 
         Factura nuevaFactura = new Factura();
@@ -75,7 +76,7 @@ public class Controlador {
         return "Guardado! ";
     }
 
-    @GetMapping(path = "list")
+    @GetMapping(path = "listFacturad")
     public String getAllFacturas(Model model)
     {
         Iterable<Factura> facturas = facturaRepository.findAll();
@@ -85,25 +86,37 @@ public class Controlador {
     //Bases de datos para Productos
     @Autowired
     private ProductoRepository productoRepository;
-    @PostMapping(path="add")
+    @PostMapping(path="addProducto")
     public @ResponseBody String addNuevoProducto(@RequestParam String descripcion, @RequestParam int cantidad){
 
         Producto nuevoProducto = new Producto();
         nuevoProducto.setDescripcion(descripcion);
         nuevoProducto.setCantidad(cantidad);
-        facturaRepository.save(nuevoProducto);
+        productoRepository.save(nuevoProducto);
         return "Guardado! ";
     }
 
-    @GetMapping(path = "list")
+    @GetMapping(path = "listProductos")
     public String getAllProductos(Model model)
     {
-        Iterable<Producto> productos = facturaRepository.findAll();
+        Iterable<Producto> productos = productoRepository.findAll();
         model.addAttribute("productos",productos);
         return "Producto";
     }
 
-
+    @PostMapping(path = "/login")
+    public String login(@RequestParam("id") String id, @RequestParam("clave") String clave,Model model)
+    {
+        Integer idU =  Integer.valueOf(id);
+        try {
+            Optional<Usuario> usuario = usuarioRepository.findById(idU);
+            if(!usuario.isEmpty()){
+                model.addAttribute("usuario",usuario);
+                return "Perfil";
+            }
+        }catch (Exception ex){}
+        return "redirect:/";
+    }
 
     /*paginas base*/
     @GetMapping("/")

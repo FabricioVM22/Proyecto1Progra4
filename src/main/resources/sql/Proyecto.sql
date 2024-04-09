@@ -28,3 +28,5 @@ create table facturas
     cliente varchar(100) NOT NULL,
     email varchar(100) NOT NULL
 );
+
+insert into usuarios(id,nombre,email,contrasena,estado)values(1,"admin","admin","admin",true);
