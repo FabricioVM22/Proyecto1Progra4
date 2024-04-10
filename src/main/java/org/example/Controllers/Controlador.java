@@ -111,7 +111,7 @@ public class Controlador {
         try {
             Integer idU =  Integer.valueOf(id);
             Usuario usuario = usuarioRepository.findById(idU).get();
-            if(Objects.equals(usuario, new Usuario())){
+            if(usuario.getId()!=null && usuario.getContrasena().equals(clave)){
                 model.addAttribute("usuario",usuario);
                 return "Perfil";
             }
