@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -107,10 +108,10 @@ public class Controlador {
     @PostMapping(path = "/login")
     public String login(@RequestParam("id") String id, @RequestParam("clave") String clave,Model model)
     {
-        Integer idU =  Integer.valueOf(id);
         try {
-            Optional<Usuario> usuario = usuarioRepository.findById(idU);
-            if(!usuario.isEmpty()){
+            Integer idU =  Integer.valueOf(id);
+            Usuario usuario = usuarioRepository.findById(idU).get();
+            if(Objects.equals(usuario, new Usuario())){
                 model.addAttribute("usuario",usuario);
                 return "Perfil";
             }
