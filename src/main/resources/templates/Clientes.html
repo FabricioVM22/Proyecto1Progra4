@@ -10,6 +10,8 @@
 <nav th:replace="Base :: nav"></nav>
 <div class="container">
     <h1>Lista de Clientes</h1>
+    <div id="Tabla">
+
     <table>
         <thead>
         <tr>
@@ -26,7 +28,9 @@
             <td th:text="${cliente.tipoCedula}"></td>
             <td th:text="${cliente.email}"></td>
         </tr>
+        </tbody>
     </table>
+    </div>
     <!-- Botón para redirigir a la página de registro de clientes -->
     <a th:href="@{/RegistrarClientes}" class="button">Registrar Cliente</a>
 </div>
