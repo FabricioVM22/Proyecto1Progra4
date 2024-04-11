@@ -106,13 +106,18 @@ public class Controlador {
     }
 
     @PostMapping(path = "/login")
-    public String login(@RequestParam("id") String id, @RequestParam("clave") String clave,Model model)
+    public String login(@RequestParam("usuario") String usuarioNombre, @RequestParam("clave") String clave,Model model)
     {
+        Usuario nUsuario = new Usuario();
         try {
-            Integer idU =  Integer.valueOf(id);
-            Usuario usuario = usuarioRepository.findById(idU).get();
-            if(usuario.getId()!=null && usuario.getContrasena().equals(clave)){
-                model.addAttribute("usuario",usuario);
+            Iterable<Usuario> usuarios = usuarioRepository.findAll();
+            for (Usuario usuario : usuarios) {
+                if (usuario.getNombre().equals(usuarioNombre)) {
+                    nUsuario = usuario;
+                }
+            }
+            if(nUsuario.getContrasena().equals(clave)){
+                model.addAttribute("usuario",nUsuario);
                 return "Perfil";
             }
         }catch (Exception ex){}
