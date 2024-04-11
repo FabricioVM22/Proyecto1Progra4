@@ -1,7 +1,7 @@
 create database Proyecto;
 use Proyecto;
 
-create table usuarios
+create table usuario
 (
 	id int NOT NULL primary key,
     nombre varchar(100) NOT NULL,
@@ -9,20 +9,20 @@ create table usuarios
     contrasena varchar(100) NOT NULL,
     estado boolean NOT NULL
 );
-create table clientes
+create table cliente
 (
 	cedula int NOT NULL primary key,
     nombre varchar(100) NOT NULL,
     tipoCedula varchar(100) NOT NULL,
     email varchar(100) NOT NULL
 );
-create table productos
+create table producto
 (
 	numProducto int NOT NULL primary key,
     descripcion varchar(100) NOT NULL,
     cantidad int NOT NULL
 );
-create table facturas
+create table factura
 (
 	numFactura int NOT NULL primary key,
     cliente varchar(100) NOT NULL,
