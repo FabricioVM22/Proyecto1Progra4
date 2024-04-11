@@ -28,8 +28,8 @@ public class Controlador {
     private UsuarioRepository usuarioRepository;
     Usuario usuarioActual;
 
-    @PostMapping(path="addUsuario")
-    public @ResponseBody String addNuevoUsuario(@RequestParam String nombre, @RequestParam String email){
+    @PostMapping(path = "addUsuario")
+    public @ResponseBody String addNuevoUsuario(@RequestParam String nombre, @RequestParam String email) {
 
         Usuario nuevoUsuario = new Usuario();
         nuevoUsuario.setNombre(nombre);
@@ -39,17 +39,18 @@ public class Controlador {
     }
 
     @GetMapping(path = "listUsuario")
-    public String getAllUsers(Model model)
-    {
+    public String getAllUsers(Model model) {
         Iterable<Usuario> usuarios = usuarioRepository.findAll();
-        model.addAttribute("usuarios",usuarios);
+        model.addAttribute("usuarios", usuarios);
         return "Administracion";
     }
+
     //Bases de datos para Clientes
     @Autowired
     private ClienteRepository clienteRepository;
-    @PostMapping(path="addCliente")
-    public @ResponseBody String addNuevoCliente(@RequestParam String nombre,@RequestParam String tipoCedula, @RequestParam String email){
+
+    @PostMapping(path = "addCliente")
+    public @ResponseBody String addNuevoCliente(@RequestParam("nombre") String nombre, @RequestParam("tipoCedula") String tipoCedula, @RequestParam("correo") String email) {
 
         Cliente nuevoCliente = new Cliente();
         nuevoCliente.setNombre(nombre);
@@ -60,17 +61,18 @@ public class Controlador {
     }
 
     @GetMapping(path = "listCliente")
-    public String getAllClientes(Model model)
-    {
+    public String getAllClientes(Model model) {
         Iterable<Cliente> clientes = clienteRepository.findAll();
-        model.addAttribute("clientes",clientes);
+        model.addAttribute("clientes", clientes);
         return "Clientes";
     }
+
     //Bases de datos para Facturas
     @Autowired
     private FacturaRepository facturaRepository;
-    @PostMapping(path="addFactura")
-    public @ResponseBody String addNuevaFactura(@RequestParam String cliente, @RequestParam String email){
+
+    @PostMapping(path = "addFactura")
+    public @ResponseBody String addNuevaFactura(@RequestParam("cliente") String cliente, @RequestParam("correo") String email) {
 
         Factura nuevaFactura = new Factura();
         nuevaFactura.setCliente(cliente);
@@ -80,17 +82,18 @@ public class Controlador {
     }
 
     @GetMapping(path = "listFacturad")
-    public String getAllFacturas(Model model)
-    {
+    public String getAllFacturas(Model model) {
         Iterable<Factura> facturas = facturaRepository.findAll();
-        model.addAttribute("facturas",facturas);
+        model.addAttribute("facturas", facturas);
         return "Facturas";
     }
+
     //Bases de datos para Productos
     @Autowired
     private ProductoRepository productoRepository;
-    @PostMapping(path="addProducto")
-    public @ResponseBody String addNuevoProducto(@RequestParam String descripcion, @RequestParam int cantidad){
+
+    @PostMapping(path = "addProducto")
+    public @ResponseBody String addNuevoProducto(@RequestParam("descripcion") String descripcion, @RequestParam("cantidad") int cantidad) {
 
         Producto nuevoProducto = new Producto();
         nuevoProducto.setDescripcion(descripcion);
@@ -100,16 +103,14 @@ public class Controlador {
     }
 
     @GetMapping(path = "listProductos")
-    public String getAllProductos(Model model)
-    {
+    public String getAllProductos(Model model) {
         Iterable<Producto> productos = productoRepository.findAll();
-        model.addAttribute("productos",productos);
+        model.addAttribute("productos", productos);
         return "Producto";
     }
 
     @PostMapping(path = "/login")
-    public String login(@RequestParam("usuario") String usuarioNombre, @RequestParam("clave") String clave,Model model)
-    {
+    public String login(@RequestParam("usuario") String usuarioNombre, @RequestParam("clave") String clave, Model model) {
         Usuario nUsuario = new Usuario();
         try {
             Iterable<Usuario> usuarios = usuarioRepository.findAll();
@@ -118,12 +119,13 @@ public class Controlador {
                     nUsuario = usuario;
                 }
             }
-            if(nUsuario.getContrasena().equals(clave)){
-                model.addAttribute("usuario",nUsuario);
+            if (nUsuario.getContrasena().equals(clave)) {
+                model.addAttribute("usuario", nUsuario);
                 usuarioActual = nUsuario;
                 return "Perfil";
             }
-        }catch (Exception ex){}
+        } catch (Exception ex) {
+        }
         return "redirect:/";
     }
 
@@ -137,28 +139,31 @@ public class Controlador {
     @GetMapping("/Clientes")
     public String Clientes(Model model) {
         Iterable<Cliente> clientes = clienteRepository.findAll();
-        model.addAttribute("clientes",clientes);
+        model.addAttribute("clientes", clientes);
         return "Clientes";
     }
 
     @GetMapping("/Facturas")
     public String Facturas(Model model) {
         Iterable<Factura> facturas = facturaRepository.findAll();
-        model.addAttribute("facturas",facturas);
+        model.addAttribute("facturas", facturas);
         return "Facturas";
     }
+
     @GetMapping("/Productos")
     public String Productos(Model model) {
         Iterable<Producto> productos = productoRepository.findAll();
-        model.addAttribute("productos",productos);
+        model.addAttribute("productos", productos);
         return "Productos";
     }
+
     @GetMapping("/Administracion")
     public String Administracion(Model model) {
         Iterable<Usuario> usuarios = usuarioRepository.findAll();
-        model.addAttribute("usuarios",usuarios);
+        model.addAttribute("usuarios", usuarios);
         return "Administracion";
     }
+
     /*forms*/
     @GetMapping("/RegistrarClientes")
     public String RegistrarCliente(Model model) {
@@ -173,22 +178,25 @@ public class Controlador {
         model.addAttribute("modelo", modeloRF);
         return "RegistrarFacturas";
     }
+
     @GetMapping("/RegistrarProductos")
     public String RegistrarProductos(Model model) {
         Modelo modeloRP = new Modelo("esta es la pagina de información");
         model.addAttribute("modelo", modeloRP);
         return "RegistrarProductos";
     }
+
     @GetMapping("/AdministrarProveedores")
     public String AdministrarProveedores(Model model) {
         Modelo modeloAP = new Modelo("esta es la pagina de administracion de proveedores");
         model.addAttribute("modelo", modeloAP);
         return "AdministrarProveedores";
     }
+
     @GetMapping("/Perfil")
     public String perfil(Model model) {
         Modelo modelo = new Modelo("esta es la pagina de información");
-        model.addAttribute("usuario",usuarioActual);
+        model.addAttribute("usuario", usuarioActual);
         model.addAttribute("modelo", modelo);
         return "Perfil";
     }

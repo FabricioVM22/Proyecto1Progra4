@@ -29,4 +29,8 @@ create table factura
     email varchar(100) NOT NULL
 );
 
-insert into usuarios(id,nombre,email,contrasena,estado)values(1,"admin","admin","admin",true);
+insert into usuario(id,nombre,email,contrasena,estado)values(1,'admin','admin','admin',true);
+
+ALTER TABLE factura RENAME COLUMN numFactura TO num_factura;
+ALTER TABLE producto RENAME COLUMN numProducto TO num_producto;
+ALTER TABLE cliente RENAME COLUMN tipoCedula TO tipo_cedula;
