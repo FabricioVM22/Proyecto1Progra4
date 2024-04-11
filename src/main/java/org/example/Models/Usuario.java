@@ -46,4 +46,8 @@ public class Usuario {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
 }

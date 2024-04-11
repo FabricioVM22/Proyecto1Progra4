@@ -45,12 +45,26 @@ public class Controlador {
         return "Administracion";
     }
 
+    @PostMapping(path = "/actualizarUsuarios")
+    public @ResponseBody String actualizarUsuarios(@RequestParam("idUsuario") String idUsuario, @RequestParam("estadoUsuario") Boolean estado, Model model) {
+
+        Iterable<Usuario> usuarios = usuarioRepository.findAll();
+
+        for (Usuario usuario : usuarios) {
+            if (usuario.getId().equals(Integer.valueOf(idUsuario))) {
+                usuario.setEstado(estado);
+            }
+        }
+        model.addAttribute("usuarios", usuarios);
+        return "AdministrarProveedores";
+    }
+
     //Bases de datos para Clientes
     @Autowired
     private ClienteRepository clienteRepository;
 
     @PostMapping(path = "addCliente")
-    public @ResponseBody String addNuevoCliente(@RequestParam("nombre") String nombre, @RequestParam("tipoCedula") String tipoCedula, @RequestParam("correo") String email) {
+    public @ResponseBody String addNuevoCliente(@RequestParam("nombre") String nombre, @RequestParam("tipo_cedula") String tipoCedula, @RequestParam("correo") String email) {
 
         Cliente nuevoCliente = new Cliente();
         nuevoCliente.setNombre(nombre);
@@ -188,8 +202,8 @@ public class Controlador {
 
     @GetMapping("/AdministrarProveedores")
     public String AdministrarProveedores(Model model) {
-        Modelo modeloAP = new Modelo("esta es la pagina de administracion de proveedores");
-        model.addAttribute("modelo", modeloAP);
+        Iterable<Usuario> usuarios = usuarioRepository.findAll();
+        model.addAttribute("usuarios", usuarios);
         return "AdministrarProveedores";
     }
 
