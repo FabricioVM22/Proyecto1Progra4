@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Factura {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer numFactura;
     private String cliente;
     private String email;

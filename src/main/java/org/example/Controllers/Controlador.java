@@ -64,14 +64,16 @@ public class Controlador {
     private ClienteRepository clienteRepository;
 
     @PostMapping(path = "addCliente")
-    public @ResponseBody String addNuevoCliente(@RequestParam("nombre") String nombre, @RequestParam("tipo_cedula") String tipoCedula, @RequestParam("correo") String email) {
+    public String addNuevoCliente(@RequestParam("nombre") String nombre, @RequestParam("tipo_cedula") String tipoCedula, @RequestParam("correo") String email, Model model) {
 
         Cliente nuevoCliente = new Cliente();
         nuevoCliente.setNombre(nombre);
         nuevoCliente.setTipoCedula(tipoCedula);
         nuevoCliente.setEmail(email);
         clienteRepository.save(nuevoCliente);
-        return "Guardado! ";
+        Iterable<Cliente> clientes = clienteRepository.findAll();
+        model.addAttribute("clientes", clientes);
+        return "Clientes";
     }
 
     @GetMapping(path = "listCliente")
@@ -86,13 +88,15 @@ public class Controlador {
     private FacturaRepository facturaRepository;
 
     @PostMapping(path = "addFactura")
-    public @ResponseBody String addNuevaFactura(@RequestParam("cliente") String cliente, @RequestParam("correo") String email) {
+    public @ResponseBody String addNuevaFactura(@RequestParam("cliente") String cliente, @RequestParam("correo") String email, Model model  ) {
 
         Factura nuevaFactura = new Factura();
         nuevaFactura.setCliente(cliente);
         nuevaFactura.setEmail(email);
         facturaRepository.save(nuevaFactura);
-        return "Guardado! ";
+        Iterable<Factura> facturas = facturaRepository.findAll();
+        model.addAttribute("facturas", facturas);
+        return "Facturas";
     }
 
     @GetMapping(path = "listFacturad")
@@ -107,13 +111,15 @@ public class Controlador {
     private ProductoRepository productoRepository;
 
     @PostMapping(path = "addProducto")
-    public @ResponseBody String addNuevoProducto(@RequestParam("descripcion") String descripcion, @RequestParam("cantidad") int cantidad) {
+    public @ResponseBody String addNuevoProducto(@RequestParam("descripcion") String descripcion, @RequestParam("cantidad") int cantidad, Model model) {
 
         Producto nuevoProducto = new Producto();
         nuevoProducto.setDescripcion(descripcion);
         nuevoProducto.setCantidad(cantidad);
         productoRepository.save(nuevoProducto);
-        return "Guardado! ";
+        Iterable<Producto> productos = productoRepository.findAll();
+        model.addAttribute("productos", productos);
+        return "Producto";
     }
 
     @GetMapping(path = "listProductos")

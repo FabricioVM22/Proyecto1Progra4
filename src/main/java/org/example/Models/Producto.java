@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Producto {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer numProducto;
     private String descripcion;
     private int cantidad;
