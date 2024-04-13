@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:extends="Base">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Clientes</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/styles.css}">
+</head>
+<body>
+<header th:replace="Base :: header"></header>
+<nav th:replace="Base :: nav"></nav>
+
+<div class="container">
+    <h1>Registro de Clientes</h1>
+    <form action="/addUsuario" method="post">
+        <div>
+            <label for="nombre">Nombre del Cliente:</label>
+            <input type="text" id="nombre" name="nombre" required>
+        </div>
+        <div>
+            <label for="clave">Contraseña:</label>
+            <input type="text" id="clave" name="clave" required>
+        </div>
+        <div>
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" id="correo" name="correo" required>
+        </div>
+        <div>
+            <button type="submit">Registrar Cliente</button>
+        </div>
+    </form>
+</div>
+<footer th:replace="Base :: footer"></footer>
+</body>
+</html>

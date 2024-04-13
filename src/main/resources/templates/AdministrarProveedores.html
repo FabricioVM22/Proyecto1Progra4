@@ -10,7 +10,7 @@
 <nav th:replace="Base :: nav"></nav>
 <div class="container">
     <h1>Lista de Proveedores</h1>
-    <form action="#" method="post">
+    <form action="/actualizarUsuarios" method="post">
         <table>
             <tr>
                 <th>ID</th>
@@ -24,9 +24,9 @@
                 <td th:text="${usuario.nombre}"></td>
                 <td th:text="${usuario.email}"></td>
                 <td th:text="${usuario.contrasena}"></td>
-                <td><select id="estadoUsuario" name="estadoUsuario" required>
-                    <option value="Activa">Activa</option>
-                    <option value="Desactiva">Desactiva</option>
+                <td><select id="estadoUsuario" name="estadoUsuario">
+                    <option value="true">Activa</option>
+                    <option value="false">Desactiva</option>
                 </select>
                 </td>
             </tr>

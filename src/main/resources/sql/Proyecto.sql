@@ -3,7 +3,7 @@ use Proyecto;
 
 create table usuario
 (
-	id int NOT NULL primary key,
+	id int auto_increment NOT NULL primary key,
     nombre varchar(100) NOT NULL,
     email varchar(100) NOT NULL,
     contrasena varchar(100) NOT NULL,

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -29,13 +30,15 @@ public class Controlador {
     Usuario usuarioActual;
 
     @PostMapping(path = "addUsuario")
-    public @ResponseBody String addNuevoUsuario(@RequestParam String nombre, @RequestParam String email) {
+    public String addNuevoUsuario(@RequestParam("nombre") String nombre,@RequestParam("clave") String clave, @RequestParam("correo") String email) {
 
         Usuario nuevoUsuario = new Usuario();
         nuevoUsuario.setNombre(nombre);
+        nuevoUsuario.setContrasena(clave);
         nuevoUsuario.setEmail(email);
+        nuevoUsuario.setEstado(false);
         usuarioRepository.save(nuevoUsuario);
-        return "Guardado! ";
+        return "index";
     }
 
     @GetMapping(path = "listUsuario")
@@ -46,17 +49,32 @@ public class Controlador {
     }
 
     @PostMapping(path = "/actualizarUsuarios")
-    public @ResponseBody String actualizarUsuarios(@RequestParam("idUsuario") String idUsuario, @RequestParam("estadoUsuario") Boolean estado, Model model) {
+    public String actualizarUsuarios(@RequestParam("estadoUsuario") String estadosUsuarios, Model model) {
 
+
+        // Obtener todos los usuarios del repositorio
         Iterable<Usuario> usuarios = usuarioRepository.findAll();
 
-        for (Usuario usuario : usuarios) {
-            if (usuario.getId().equals(Integer.valueOf(idUsuario))) {
-                usuario.setEstado(estado);
-            }
+        // Dividir el String de estados en un array de Strings
+        String[] estadosArray = estadosUsuarios.split(",");
+
+        // Iterar sobre cada usuario y asignarle su respectivo estado
+        Iterator<Usuario> usuarioIterator = usuarios.iterator();
+        int index = 0;
+        while (usuarioIterator.hasNext() && index < estadosArray.length) {
+            Usuario usuario = usuarioIterator.next();
+            String estadoStr = estadosArray[index].trim(); // Limpiar espacios en blanco
+            boolean estado = Boolean.parseBoolean(estadoStr); // Convertir a boolean
+            usuario.setEstado(estado);
+            usuarioRepository.save(usuario);
+            index++;
         }
+
+        // Añadir los usuarios actualizados al modelo
         model.addAttribute("usuarios", usuarios);
-        return "AdministrarProveedores";
+
+        // Devolver la vista deseada
+        return "Administracion";
     }
 
     //Bases de datos para Clientes
@@ -139,7 +157,10 @@ public class Controlador {
                     nUsuario = usuario;
                 }
             }
-            if (nUsuario.getContrasena().equals(clave)) {
+/*            if(!nUsuario.getEstado()){
+              return "/";
+            }*/
+            if (nUsuario.getContrasena().equals(clave) && nUsuario.getEstado()) {
                 model.addAttribute("usuario", nUsuario);
                 usuarioActual = nUsuario;
                 return "Perfil";
@@ -204,6 +225,12 @@ public class Controlador {
         Modelo modeloRP = new Modelo("esta es la pagina de información");
         model.addAttribute("modelo", modeloRP);
         return "RegistrarProductos";
+    }
+    @GetMapping("/RegistrarUsuarios")
+    public String RegistrarUsuarios(Model model) {
+        Modelo modeloRP = new Modelo("esta es la pagina de información");
+        model.addAttribute("modelo", modeloRP);
+        return "RegistrarUsuario";
     }
 
     @GetMapping("/AdministrarProveedores")
