@@ -100,10 +100,26 @@ form button[type="submit"] {
     cursor: pointer;
 }
 
-form button[type="submit"]:hover {
+form button[type="button"]:hover {
     background-color: #666;
 }
-
+form button[type="button"] {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+from button[type="button"] a{
+    text-decoration: none;
+    color: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+}
+form button[type="button"]:hover {
+    background-color: #666;
+}
 /*estilos de la tabla*/
 #Tabla{
     box-shadow: 0px 32px 50px -22px #333333;

@@ -72,7 +72,7 @@ public class Controlador {
 
         // Añadir los usuarios actualizados al modelo
         model.addAttribute("usuarios", usuarios);
-
+        base(model);
         // Devolver la vista deseada
         return "Administracion";
     }
@@ -91,6 +91,7 @@ public class Controlador {
         clienteRepository.save(nuevoCliente);
         Iterable<Cliente> clientes = clienteRepository.findAll();
         model.addAttribute("clientes", clientes);
+        base(model);
         return "Clientes";
     }
 
@@ -106,7 +107,7 @@ public class Controlador {
     private FacturaRepository facturaRepository;
 
     @PostMapping(path = "addFactura")
-    public @ResponseBody String addNuevaFactura(@RequestParam("cliente") String cliente, @RequestParam("correo") String email, Model model  ) {
+    public String addNuevaFactura(@RequestParam("cliente") String cliente, @RequestParam("correo") String email, Model model  ) {
 
         Factura nuevaFactura = new Factura();
         nuevaFactura.setCliente(cliente);
@@ -114,6 +115,7 @@ public class Controlador {
         facturaRepository.save(nuevaFactura);
         Iterable<Factura> facturas = facturaRepository.findAll();
         model.addAttribute("facturas", facturas);
+        base(model);
         return "Facturas";
     }
 
@@ -129,7 +131,7 @@ public class Controlador {
     private ProductoRepository productoRepository;
 
     @PostMapping(path = "addProducto")
-    public @ResponseBody String addNuevoProducto(@RequestParam("descripcion") String descripcion, @RequestParam("cantidad") int cantidad, Model model) {
+    public String addNuevoProducto(@RequestParam("descripcion") String descripcion, @RequestParam("cantidad") int cantidad, Model model) {
 
         Producto nuevoProducto = new Producto();
         nuevoProducto.setDescripcion(descripcion);
@@ -137,6 +139,7 @@ public class Controlador {
         productoRepository.save(nuevoProducto);
         Iterable<Producto> productos = productoRepository.findAll();
         model.addAttribute("productos", productos);
+        base(model);
         return "Producto";
     }
 
@@ -157,12 +160,10 @@ public class Controlador {
                     nUsuario = usuario;
                 }
             }
-/*            if(!nUsuario.getEstado()){
-              return "/";
-            }*/
             if (nUsuario.getContrasena().equals(clave) && nUsuario.getEstado()) {
                 model.addAttribute("usuario", nUsuario);
                 usuarioActual = nUsuario;
+                base(model);
                 return "Perfil";
             }
         } catch (Exception ex) {
@@ -174,6 +175,7 @@ public class Controlador {
     @GetMapping("/")
     public String index(Model model) {
         usuarioActual = new Usuario();
+        base(model);
         return "Index";
     }
 
@@ -181,6 +183,7 @@ public class Controlador {
     public String Clientes(Model model) {
         Iterable<Cliente> clientes = clienteRepository.findAll();
         model.addAttribute("clientes", clientes);
+        base(model);
         return "Clientes";
     }
 
@@ -188,6 +191,7 @@ public class Controlador {
     public String Facturas(Model model) {
         Iterable<Factura> facturas = facturaRepository.findAll();
         model.addAttribute("facturas", facturas);
+        base(model);
         return "Facturas";
     }
 
@@ -195,6 +199,7 @@ public class Controlador {
     public String Productos(Model model) {
         Iterable<Producto> productos = productoRepository.findAll();
         model.addAttribute("productos", productos);
+        base(model);
         return "Productos";
     }
 
@@ -202,6 +207,7 @@ public class Controlador {
     public String Administracion(Model model) {
         Iterable<Usuario> usuarios = usuarioRepository.findAll();
         model.addAttribute("usuarios", usuarios);
+        base(model);
         return "Administracion";
     }
 
@@ -210,6 +216,7 @@ public class Controlador {
     public String RegistrarCliente(Model model) {
         Modelo modeloRC = new Modelo("esta es la pagina de registro de Clientes");
         model.addAttribute("modelo", modeloRC);
+        base(model);
         return "RegistrarClientes";
     }
 
@@ -217,6 +224,7 @@ public class Controlador {
     public String RegistrarFacturas(Model model) {
         Modelo modeloRF = new Modelo("esta es la pagina de información");
         model.addAttribute("modelo", modeloRF);
+        base(model);
         return "RegistrarFacturas";
     }
 
@@ -224,12 +232,14 @@ public class Controlador {
     public String RegistrarProductos(Model model) {
         Modelo modeloRP = new Modelo("esta es la pagina de información");
         model.addAttribute("modelo", modeloRP);
+        base(model);
         return "RegistrarProductos";
     }
     @GetMapping("/RegistrarUsuarios")
     public String RegistrarUsuarios(Model model) {
         Modelo modeloRP = new Modelo("esta es la pagina de información");
         model.addAttribute("modelo", modeloRP);
+        base(model);
         return "RegistrarUsuario";
     }
 
@@ -237,6 +247,7 @@ public class Controlador {
     public String AdministrarProveedores(Model model) {
         Iterable<Usuario> usuarios = usuarioRepository.findAll();
         model.addAttribute("usuarios", usuarios);
+        base(model);
         return "AdministrarProveedores";
     }
 
@@ -245,7 +256,19 @@ public class Controlador {
         Modelo modelo = new Modelo("esta es la pagina de información");
         model.addAttribute("usuario", usuarioActual);
         model.addAttribute("modelo", modelo);
+        base(model);
         return "Perfil";
     }
+    public void base(Model model) {
+        Modelo modelo = new Modelo();
+        try {
+            if(usuarioActual.getNombre().equals("admin")){
+                modelo.setMessage("Administracion");
+            }else{
+                modelo.setMessage(null);
+            }
+        }catch (Exception ex){}
 
+        model.addAttribute("modelo", modelo);
+    }
 }
