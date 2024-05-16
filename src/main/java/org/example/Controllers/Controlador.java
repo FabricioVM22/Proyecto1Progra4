@@ -140,7 +140,7 @@ public class Controlador {
         Iterable<Producto> productos = productoRepository.findAll();
         model.addAttribute("productos", productos);
         base(model);
-        return "Producto";
+        return "Productos";
     }
 
     @GetMapping(path = "listProductos")
