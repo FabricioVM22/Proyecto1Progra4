@@ -8,6 +8,7 @@ const headerContent = `
 `;
 
 // Contenido del nav
+//<!--<li><a href="/Administracion" th:text="${modelo.message}"></a></li>-->
 const navContent = `
 <nav>
     <div class="container">
@@ -16,7 +17,6 @@ const navContent = `
             <li><a href="/Clientes">Registrar Clientes</a></li>
             <li><a href="/Productos">Registrar Productos</a></li>
             <li><a href="/Facturas">Facturar</a></li>
-            <!--<li><a href="/Administracion" th:text="${modelo.message}"></a></li>-->
             <li><a href="/">Log Out</a></li>
         </ul>
     </div>
