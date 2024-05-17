@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" th:extends="Base">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Lista de Clientes</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/CSS/styles.css}">
+    <link rel="stylesheet" type="text/css" href="/CSS/styles.css">
 </head>
 <body>
-<header th:replace="Base :: header"></header>
-<nav th:replace="Base :: nav"></nav>
+<header id="header"></header>
+<nav id="nav"></nav>
 <div class="container">
     <h1>Lista de Clientes</h1>
     <div id="Tabla">
@@ -21,19 +21,20 @@
             <th>Correo Electrónico</th>
         </tr>
         </thead>
-        <tbody>
+<!--        <tbody>
         <tr th:each="cliente : ${clientes}">
             <td th:text="${cliente.nombre}"></td>
             <td th:text="${cliente.cedula}"></td>
             <td th:text="${cliente.tipoCedula}"></td>
             <td th:text="${cliente.email}"></td>
         </tr>
-        </tbody>
+        </tbody>-->
     </table>
     </div>
     <!-- Botón para redirigir a la página de registro de clientes -->
-    <a th:href="@{/RegistrarClientes}" class="button">Registrar Cliente</a>
+    <a href="RegistrarClientes" class="button">Registrar Cliente</a>
 </div>
-<footer th:replace="Base :: footer"></footer>
+<footer id="footer"></footer>
+<script src="/JS/base.js"></script>
 </body>
 </html>

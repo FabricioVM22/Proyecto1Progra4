@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" th:extends="Base">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Registro de Clientes</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/CSS/styles.css}">
+    <link rel="stylesheet" type="text/css" href="/CSS/styles.css">
 </head>
 <body>
-<header th:replace="Base :: header"></header>
-<nav th:replace="Base :: nav"></nav>
+<header id="header"></header>
+<nav id="nav"></nav>
 
 <div class="container">
     <h1>Registro de Productos</h1>
     <form action="/addProducto" method="post">
-<!--        <div>-->
-<!--            <label for="producto">Número de Producto:</label>-->
-<!--            <input type="text" id="producto" name="producto" required>-->
-<!--        </div>-->
         <div>
             <label for="descripcion">Descripcion del Producto:</label>
             <input type="text" id="descripcion" name="descripcion" required>
@@ -29,6 +25,7 @@
         </div>
     </form>
 </div>
-<footer th:replace="Base :: footer"></footer>
+<footer id="footer"></footer>
+<script src="/JS/base.js"></script>
 </body>
 </html>

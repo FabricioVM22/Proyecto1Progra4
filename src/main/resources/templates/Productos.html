@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" th:extends="Base">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Lista de Productos</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/CSS/styles.css}">
+    <link rel="stylesheet" type="text/css" href="/CSS/styles.css">
 </head>
 <body>
-<header th:replace="Base :: header"></header>
-<nav th:replace="Base :: nav"></nav>
+<header id="header"></header>
+<nav id="nav"></nav>
 <div class="container">
     <h1>Lista de Productos</h1>
     <table>
@@ -18,19 +18,20 @@
             <th>Cantidad</th>
         </tr>
         </thead>
-        <tbody>
+<!--        <tbody>
         <tr th:each="producto : ${productos}">
             <td th:text="${producto.numProducto}"></td>
             <td th:text="${producto.descripcion}"></td>
             <td th:text="${producto.cantidad}"></td>
         </tr>
 
-        </tbody>
+        </tbody>-->
     </table>
     <!-- Botón para redirigir a la página de registro de productos -->
-    <a th:href="@{/RegistrarProductos}" class="button">Registrar Producto</a>
+    <a href="/RegistrarProductos" class="button">Registrar Producto</a>
 </div>
-<footer th:replace="Base :: footer"></footer>
+<footer id="footer"></footer>
+<script src="/JS/base.js"></script>
 </body>
 </html>
 >

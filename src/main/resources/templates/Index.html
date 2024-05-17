@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" th:extends="Base">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Bienvenido/a!</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/CSS/styles.css}">
+    <link rel="stylesheet" type="text/css" href="/CSS/styles.css">
 </head>
 <body>
-<header th:replace="Base :: header"></header>
+<header id="header"></header>
 
 <div class="container">
     <h2>Login</h2>
@@ -22,6 +22,7 @@
     </form>
 </div>
 
-<div th:replace="Base :: footer"></div>
+<div id="footer"></div>
+<script src="/JS/base.js"></script>
 </body>
 </html>
