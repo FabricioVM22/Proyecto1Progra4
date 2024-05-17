@@ -3,34 +3,28 @@ package org.example.Controllers;
 import org.example.Models.Usuario;
 import org.example.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 
+@RestController
+@RequestMapping("/api/usuarios")
 public class UsuarioController {
     private final UsuarioRepository usuarioRepository;
 
+    @Autowired
     public UsuarioController(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
 
-    //cargar tablas
-    @GetMapping(path = "listUsuario")
-    public String getAllUsers(Model model) {
-        Iterable<Usuario> usuarios = usuarioRepository.findAll();
-        model.addAttribute("usuarios", usuarios);
-        return "Administracion";
+    @GetMapping
+    public List<Usuario> getAllUsers() {
+        return (List<Usuario>) usuarioRepository.findAll();
     }
-    //métodos
-    @PostMapping(path = "addUsuario")
-    public String addNuevoUsuario(Usuario usuario, Model model) {
+
+    @PostMapping
+    public void addNuevoUsuario(@RequestBody Usuario usuario) {
         usuarioRepository.save(usuario);
-        Iterable<Usuario> usuarios = usuarioRepository.findAll();
-        model.addAttribute("usuarios", usuarios);
-        return "redirect:/index";
     }
 
 }
