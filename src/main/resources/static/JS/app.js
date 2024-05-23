@@ -74,7 +74,6 @@ function fetchClientes() {
         })
         .catch(error => console.error("Error al obtener clientes:", error));
 }
-
 function fetchFacturas() {
     fetch("/api/facturas")
         .then(response => response.json()).then(facturas => {
@@ -131,8 +130,8 @@ function fetchProdutos() {
 function fetchUsuarios() {
     fetch("/api/usuarios")
         .then(response => response.json()).then(usuarios => {
-            const listaUsuarios = document.getElementById("lista-usuarios");
-            listaUsuarios.innerHTML = "";
+            const TablaUsuarios = document.getElementById("tabla-usuarios");
+        TablaUsuarios.innerHTML = "";
             const encabezado = document.createElement("tr");
             encabezado.innerHTML = `
                 <th>ID</th>
@@ -141,12 +140,18 @@ function fetchUsuarios() {
                 <th>Contraseña</th>
                 <th>Estado</th>
             `;
+            TablaUsuarios.appendChild(encabezado);
             //llenar tablas
 
             usuarios.forEach(usuario => {
-                const li = document.createElement("li");
-                li.textContent = `ID: ${usuario.id}, Nombre: ${usuario.nombre}, Correo: ${usuario.correo}`;
-                listaUsuarios.appendChild(li);
+                const fila = document.createElement("tr");
+               fila.innerHTML = `
+                <td ${usuario.id}></td>
+                <td ${usuario.nombre}></td>
+                <td ${usuario.email}></td>
+                <td ${usuario.contrasena}></td>
+                <td ${usuario.estado}></td>
+               `;
             });
         })
         .catch(error => console.error("Error al obtener usuarios:", error));
@@ -162,24 +167,24 @@ document.addEventListener('DOMContentLoaded', function(){
         fetchClientes();
     }
     if(window.location.pathname === "Facturas"){
-        fetchClientes();
+        fetchFacturas();
     }
     if(window.location.pathname === "Productos"){
-        fetchClientes();
+        fetchProdutos();
     }
     if(window.location.pathname === "Proveedores"){
         fetchClientes();
     }
     if(window.location.pathname === "Administracion"){
-        fetchClientes();
+        fetchUsuarios();
     }
 
 
     //formularios
     //formulario de nuevo cliente
-    const formularioUsuario = document.getElementById('formularioCliente');
-    if(formularioUsuario){
-        formularioUsuario.addEventListener('submit', function(event){
+    const formularioCliente = document.getElementById('formularioCliente');
+    if(formularioCliente){
+        formularioCliente.addEventListener('submit', function(event){
             event.preventDefault();
             const nombre = document.getElementById('nombre').value;
             const correo = document.getElementById('correo').value;
@@ -188,5 +193,38 @@ document.addEventListener('DOMContentLoaded', function(){
         })
     }
 
+    //formulario de nuevo producto
+    const formularioProductos = document.getElementById('formularioProductos');
+    if(formularioProductos){
+        formularioProductos.addEventListener('submit', function(event){
+            event.preventDefault();
+            const descripcion = document.getElementById('descripcion').value;
+            const cantidad = document.getElementById('cantidad').value;
+            guardarProducto({descripcion,cantidad});
+        })
+    }
+
+    //formulario de nueva factura
+    const formularioFacturas = document.getElementById('formularioFacturas');
+    if(formularioFacturas){
+        formularioFacturas.addEventListener('submit', function(event){
+            event.preventDefault();
+            const cliente = document.getElementById('cliente').value;
+            const email = document.getElementById('email').value;
+            guardarFactura({cliente,emai});
+        })
+    }
+
+    //formulario de nuevo usuario
+    const formularioUsuario = document.getElementById('formularioUsuario');
+    if(formularioUsuario){
+        formularioUsuario.addEventListener('submit', function(event){
+            event.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const clave = document.getElementById('clave');
+            const correo = document.getElementById('correo').value;
+            guardarUsuario({nombre,correo,clave});
+        })
+    }
 
 })
