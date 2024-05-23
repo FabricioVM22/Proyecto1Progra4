@@ -11,25 +11,10 @@
 <div class="container">
     <h1>Lista de Clientes</h1>
     <div id="Tabla">
+        <table id="tabla-clientes">
+            <!-- Las filas se agregarán aquí mediante JavaScript -->
+        </table>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Cédula</th>
-            <th>Tipo de Cédula</th>
-            <th>Correo Electrónico</th>
-        </tr>
-        </thead>
-<!--        <tbody>
-        <tr th:each="cliente : ${clientes}">
-            <td th:text="${cliente.nombre}"></td>
-            <td th:text="${cliente.cedula}"></td>
-            <td th:text="${cliente.tipoCedula}"></td>
-            <td th:text="${cliente.email}"></td>
-        </tr>
-        </tbody>-->
-    </table>
     </div>
     <!-- Botón para redirigir a la página de registro de clientes -->
     <a href="RegistrarClientes" class="button">Registrar Cliente</a>
