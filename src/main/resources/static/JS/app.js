@@ -53,7 +53,6 @@ function fetchClientes() {
             // Crear la fila de encabezados
             const encabezado = document.createElement("tr");
             encabezado.innerHTML = `
-                <th>ID Cliente</th>
                 <th>Nombre del Cliente</th>
                 <th>Correo Electrónico</th>
                 <th>Cédula</th>
@@ -64,7 +63,6 @@ function fetchClientes() {
             clientes.forEach(cliente => {
                 const fila = document.createElement("tr");
                 fila.innerHTML = `
-                    <td>${cliente.id}</td>
                     <td>${cliente.nombre}</td>
                     <td>${cliente.correo}</td>
                     <td>${cliente.cedula}</td>
@@ -97,6 +95,7 @@ function fetchFacturas() {
                 <td>${factura.cliente}</td>
                 <td>${factura.email}</td>
                 `;
+                tablafacturas.appendChild(fila);
             });
         })
         .catch(error => console.error("Error al obtener facturas:", error));
@@ -123,6 +122,7 @@ function fetchProdutos() {
                 <td>${factura.descripcion}</td>
                 <td>${factura.cantidad}</td>
                 `;
+            tablaProductos.appendChild(fila);
             });
         })
         .catch(error => console.error("Error al obtener productos:", error));
@@ -152,6 +152,7 @@ function fetchUsuarios() {
                 <td ${usuario.contrasena}></td>
                 <td ${usuario.estado}></td>
                `;
+               TablaUsuarios.appendChild(fila);
             });
         })
         .catch(error => console.error("Error al obtener usuarios:", error));
@@ -163,16 +164,16 @@ function fetchUsuarios() {
 document.addEventListener('DOMContentLoaded', function(){
     //cargar listas de páginas
 
-    if(window.location.pathname === "Clientes"){
+    if(window.location.pathname === "/Clientes"){
         fetchClientes();
     }
-    if(window.location.pathname === "Facturas"){
+    if(window.location.pathname === "/Facturas"){
         fetchFacturas();
     }
-    if(window.location.pathname === "Productos"){
+    if(window.location.pathname === "/Productos"){
         fetchProdutos();
     }
-    if(window.location.pathname === "Proveedores"){
+    if(window.location.pathname === "/Proveedores"){
         fetchClientes();
     }
     if(window.location.pathname === "Administracion"){
