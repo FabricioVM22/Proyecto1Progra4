@@ -26,16 +26,17 @@ function guardarCliente(Cliente){
         headers:{
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(usuario) //Convertimos el usuario que obtuvimos desde el formulario a Json para poder enviarlo al servicio Rest
+        body: JSON.stringify(Cliente) //Convertimos el usuario que obtuvimos desde el formulario a Json para poder enviarlo al servicio Rest
     })
         .then(response => {
             if(response.ok) //Respuesta positiva
             { //Si la respuesta es positiva, quiere decir que se almacenó el usuario
                 alert("Usuario agregado correctamente!"); //Notificamos
-                window.location.href = "/"; //Redireccionamos a la lista de usuarios
+                window.location.href = "/Clientes"; //Redireccionamos a la lista de usuarios
             }
             else //Cualquier otra cosa va a ser un error
             {
+                alert("Error al guardar el cliente");
                 throw new Error("Error al guardar el usuario");
             }
         })

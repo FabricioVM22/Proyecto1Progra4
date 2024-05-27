@@ -11,8 +11,8 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer cedula;
     private String nombre;
-    private String tipoCedula;
-    private String email;
+    private String tipo_cedula;
+    private String correo;
 
     public Integer getCedula() {
         return cedula;
@@ -30,19 +30,19 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public String getTipoCedula() {
-        return tipoCedula;
+    public String getTipo_cedula() {
+        return tipo_cedula;
     }
 
-    public void setTipoCedula(String tipoCedula) {
-        this.tipoCedula = tipoCedula;
+    public void setTipo_cedula(String tipo_cedula) {
+        this.tipo_cedula = tipo_cedula;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 }
