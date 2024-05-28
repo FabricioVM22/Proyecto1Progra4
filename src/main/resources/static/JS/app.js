@@ -42,7 +42,75 @@ function guardarCliente(Cliente){
         })
         .catch(error => console.error("Error al guardar el usuario: ", error));
 }
-
+//función para guardar usuarios nuevos
+function guardarUsuario(Usuario){
+    fetch("/api/usuarios", { //Primero determinamos el repositorio de datos al cual nos vamos a conectar
+        method: "POST", //Configuramos la acción HTTP que nos va a permitir ejecutar el proceso
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(Usuario) //Convertimos el usuario que obtuvimos desde el formulario a Json para poder enviarlo al servicio Rest
+    })
+        .then(response => {
+            if(response.ok) //Respuesta positiva
+            { //Si la respuesta es positiva, quiere decir que se almacenó el usuario
+                alert("Usuario agregado correctamente!"); //Notificamos
+                window.location.href = "/"; //Redireccionamos a la lista de usuarios
+            }
+            else //Cualquier otra cosa va a ser un error
+            {
+                alert("Error al guardar el usuario");
+                throw new Error("Error al guardar el usuario");
+            }
+        })
+        .catch(error => console.error("Error al guardar el usuario: ", error));
+}
+//función para guardar productos nuevos
+function guardarProducto(Producto){
+    fetch("/api/productos", { //Primero determinamos el repositorio de datos al cual nos vamos a conectar
+        method: "POST", //Configuramos la acción HTTP que nos va a permitir ejecutar el proceso
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(Producto) //Convertimos el usuario que obtuvimos desde el formulario a Json para poder enviarlo al servicio Rest
+    })
+        .then(response => {
+            if(response.ok) //Respuesta positiva
+            { //Si la respuesta es positiva, quiere decir que se almacenó el producto
+                alert("Usuario agregado correctamente!"); //Notificamos
+                window.location.href = "/Productos"; //Redireccionamos a la lista de productos
+            }
+            else //Cualquier otra cosa va a ser un error
+            {
+                alert("Error al guardar el producto");
+                throw new Error("Error al guardar el producto");
+            }
+        })
+        .catch(error => console.error("Error al guardar el producto: ", error));
+}
+//función para guardar facturas nuevas
+function guardarFactura(Factura){
+    fetch("/api/facturas", { //Primero determinamos el repositorio de datos al cual nos vamos a conectar
+        method: "POST", //Configuramos la acción HTTP que nos va a permitir ejecutar el proceso
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(Factura) //Convertimos el usuario que obtuvimos desde el formulario a Json para poder enviarlo al servicio Rest
+    })
+        .then(response => {
+            if(response.ok) //Respuesta positiva
+            { //Si la respuesta es positiva, quiere decir que se almacenó el producto
+                alert("Usuario agregado correctamente!"); //Notificamos
+                window.location.href = "/Facturas"; //Redireccionamos a la lista de productos
+            }
+            else //Cualquier otra cosa va a ser un error
+            {
+                alert("Error al guardar la factura");
+                throw new Error("Error al guardar la factura");
+            }
+        })
+        .catch(error => console.error("Error al guardar la factura: ", error));
+}
 //funciones para cargar las tablas
 function fetchClientes() {
     fetch("/api/clientes")
@@ -119,9 +187,9 @@ function fetchProdutos() {
         productos.forEach(producto => {
             const fila = document.createElement("tr");
             fila.innerHTML = `
-                <td>${factura.numProducto}</td>
-                <td>${factura.descripcion}</td>
-                <td>${factura.cantidad}</td>
+                <td>${producto.numProducto}</td>
+                <td>${producto.descripcion}</td>
+                <td>${producto.cantidad}</td>  
                 `;
             tablaProductos.appendChild(fila);
             });
@@ -212,8 +280,8 @@ document.addEventListener('DOMContentLoaded', function(){
         formularioFacturas.addEventListener('submit', function(event){
             event.preventDefault();
             const cliente = document.getElementById('cliente').value;
-            const email = document.getElementById('email').value;
-            guardarFactura({cliente,emai});
+            const email = document.getElementById('correo').value;
+            guardarFactura({cliente,email});
         })
     }
 
@@ -223,9 +291,9 @@ document.addEventListener('DOMContentLoaded', function(){
         formularioUsuario.addEventListener('submit', function(event){
             event.preventDefault();
             const nombre = document.getElementById('nombre').value;
-            const clave = document.getElementById('clave');
+            const contrasena = document.getElementById('clave');
             const correo = document.getElementById('correo').value;
-            guardarUsuario({nombre,correo,clave});
+            guardarUsuario({nombre,correo,contrasena});
         })
     }
 
