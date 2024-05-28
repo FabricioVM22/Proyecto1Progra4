@@ -7,7 +7,7 @@ function obtenerUsuarios() {
         }
     })
         .then(response => {
-            if(response.ok) { // Respuesta positiva
+            if (response.ok) { // Respuesta positiva
                 return response.json(); // Convertimos la respuesta a JSON
             } else { // Cualquier otra cosa va a ser un error
                 throw new Error("Error al obtener los usuarios");
@@ -20,21 +20,20 @@ function obtenerUsuarios() {
 }
 
 //función para guardar clientes nuevos
-function guardarCliente(Cliente){
+function guardarCliente(Cliente) {
     fetch("/api/clientes", { //Primero determinamos el repositorio de datos al cual nos vamos a conectar
         method: "POST", //Configuramos la acción HTTP que nos va a permitir ejecutar el proceso
-        headers:{
+        headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(Cliente) //Convertimos el usuario que obtuvimos desde el formulario a Json para poder enviarlo al servicio Rest
     })
         .then(response => {
-            if(response.ok) //Respuesta positiva
+            if (response.ok) //Respuesta positiva
             { //Si la respuesta es positiva, quiere decir que se almacenó el usuario
                 alert("Usuario agregado correctamente!"); //Notificamos
                 window.location.href = "/Clientes"; //Redireccionamos a la lista de usuarios
-            }
-            else //Cualquier otra cosa va a ser un error
+            } else //Cualquier otra cosa va a ser un error
             {
                 alert("Error al guardar el cliente");
                 throw new Error("Error al guardar el usuario");
@@ -42,22 +41,22 @@ function guardarCliente(Cliente){
         })
         .catch(error => console.error("Error al guardar el usuario: ", error));
 }
+
 //función para guardar usuarios nuevos
-function guardarUsuario(Usuario){
+function guardarUsuario(Usuario) {
     fetch("/api/usuarios", { //Primero determinamos el repositorio de datos al cual nos vamos a conectar
         method: "POST", //Configuramos la acción HTTP que nos va a permitir ejecutar el proceso
-        headers:{
+        headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(Usuario) //Convertimos el usuario que obtuvimos desde el formulario a Json para poder enviarlo al servicio Rest
     })
         .then(response => {
-            if(response.ok) //Respuesta positiva
+            if (response.ok) //Respuesta positiva
             { //Si la respuesta es positiva, quiere decir que se almacenó el usuario
                 alert("Usuario agregado correctamente!"); //Notificamos
                 window.location.href = "/"; //Redireccionamos a la lista de usuarios
-            }
-            else //Cualquier otra cosa va a ser un error
+            } else //Cualquier otra cosa va a ser un error
             {
                 alert("Error al guardar el usuario");
                 throw new Error("Error al guardar el usuario");
@@ -65,22 +64,22 @@ function guardarUsuario(Usuario){
         })
         .catch(error => console.error("Error al guardar el usuario: ", error));
 }
+
 //función para guardar productos nuevos
-function guardarProducto(Producto){
+function guardarProducto(Producto) {
     fetch("/api/productos", { //Primero determinamos el repositorio de datos al cual nos vamos a conectar
         method: "POST", //Configuramos la acción HTTP que nos va a permitir ejecutar el proceso
-        headers:{
+        headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(Producto) //Convertimos el usuario que obtuvimos desde el formulario a Json para poder enviarlo al servicio Rest
     })
         .then(response => {
-            if(response.ok) //Respuesta positiva
+            if (response.ok) //Respuesta positiva
             { //Si la respuesta es positiva, quiere decir que se almacenó el producto
                 alert("Usuario agregado correctamente!"); //Notificamos
                 window.location.href = "/Productos"; //Redireccionamos a la lista de productos
-            }
-            else //Cualquier otra cosa va a ser un error
+            } else //Cualquier otra cosa va a ser un error
             {
                 alert("Error al guardar el producto");
                 throw new Error("Error al guardar el producto");
@@ -88,22 +87,22 @@ function guardarProducto(Producto){
         })
         .catch(error => console.error("Error al guardar el producto: ", error));
 }
+
 //función para guardar facturas nuevas
-function guardarFactura(Factura){
+function guardarFactura(Factura) {
     fetch("/api/facturas", { //Primero determinamos el repositorio de datos al cual nos vamos a conectar
         method: "POST", //Configuramos la acción HTTP que nos va a permitir ejecutar el proceso
-        headers:{
+        headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(Factura) //Convertimos el usuario que obtuvimos desde el formulario a Json para poder enviarlo al servicio Rest
     })
         .then(response => {
-            if(response.ok) //Respuesta positiva
+            if (response.ok) //Respuesta positiva
             { //Si la respuesta es positiva, quiere decir que se almacenó el producto
                 alert("Usuario agregado correctamente!"); //Notificamos
                 window.location.href = "/Facturas"; //Redireccionamos a la lista de productos
-            }
-            else //Cualquier otra cosa va a ser un error
+            } else //Cualquier otra cosa va a ser un error
             {
                 alert("Error al guardar la factura");
                 throw new Error("Error al guardar la factura");
@@ -111,6 +110,7 @@ function guardarFactura(Factura){
         })
         .catch(error => console.error("Error al guardar la factura: ", error));
 }
+
 //funciones para cargar las tablas
 function fetchClientes() {
     fetch("/api/clientes")
@@ -141,41 +141,43 @@ function fetchClientes() {
         })
         .catch(error => console.error("Error al obtener clientes:", error));
 }
+
 function fetchFacturas() {
     fetch("/api/facturas")
         .then(response => response.json()).then(facturas => {
-            const tablafacturas = document.getElementById("tabla-facturas");
+        const tablafacturas = document.getElementById("tabla-facturas");
         tablafacturas.innerHTML = "";
 
-            // Crear la fila de encabezados
-            const encabezado = document.createElement("tr");
-            encabezado.innerHTML = `
+        // Crear la fila de encabezados
+        const encabezado = document.createElement("tr");
+        encabezado.innerHTML = `
                     <th>Numero de factura</th>
                     <th>Nombre del Cliente</th>
                     <th>Correo Electrónico</th>
                 `;
         tablafacturas.appendChild(encabezado);
 
-            //lenar las tablas
+        //lenar las tablas
         facturas.forEach(factura => {
-                const fila = document.createElement("tr");
-                fila.innerHTML = `
+            const fila = document.createElement("tr");
+            fila.innerHTML = `
                 <td>${factura.numFactura}</td>
                 <td>${factura.cliente}</td>
                 <td>${factura.email}</td>
                 `;
-                tablafacturas.appendChild(fila);
-            });
-        })
+            tablafacturas.appendChild(fila);
+        });
+    })
         .catch(error => console.error("Error al obtener facturas:", error));
 }
+
 function fetchProdutos() {
     fetch("/api/productos")
         .then(response => response.json()).then(productos => {
-            const tablaProductos = document.getElementById("Tabla-Productos");
-            tablaProductos.innerHTML = "";
+        const tablaProductos = document.getElementById("Tabla-Productos");
+        tablaProductos.innerHTML = "";
 
-            //crear fila de encabezados
+        //crear fila de encabezados
         const encabezado = document.createElement("tr");
         encabezado.innerHTML = `
             <th>Numero producto</th>
@@ -192,60 +194,60 @@ function fetchProdutos() {
                 <td>${producto.cantidad}</td>  
                 `;
             tablaProductos.appendChild(fila);
-            });
-        })
+        });
+    })
         .catch(error => console.error("Error al obtener productos:", error));
 }
+
 function fetchUsuarios() {
     fetch("/api/usuarios")
         .then(response => response.json()).then(usuarios => {
-            const TablaUsuarios = document.getElementById("tabla-usuarios");
+        const TablaUsuarios = document.getElementById("tabla-usuarios");
         TablaUsuarios.innerHTML = "";
-            const encabezado = document.createElement("tr");
-            encabezado.innerHTML = `
+        const encabezado = document.createElement("tr");
+        encabezado.innerHTML = `
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Contraseña</th>
                 <th>Estado</th>
             `;
-            TablaUsuarios.appendChild(encabezado);
-            //llenar tablas
+        TablaUsuarios.appendChild(encabezado);
+        //llenar tablas
 
-            usuarios.forEach(usuario => {
-                const fila = document.createElement("tr");
-               fila.innerHTML = `
+        usuarios.forEach(usuario => {
+            const fila = document.createElement("tr");
+            fila.innerHTML = `
                 <td ${usuario.id}></td>
                 <td ${usuario.nombre}></td>
                 <td ${usuario.email}></td>
                 <td ${usuario.contrasena}></td>
                 <td ${usuario.estado}></td>
                `;
-               TablaUsuarios.appendChild(fila);
-            });
-        })
+            TablaUsuarios.appendChild(fila);
+        });
+    })
         .catch(error => console.error("Error al obtener usuarios:", error));
 }
 
 
-
 //listener para los formularios (y otros para las tablas)
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function () {
     //cargar listas de páginas
 
-    if(window.location.pathname === "/Clientes"){
+    if (window.location.pathname === "/Clientes") {
         fetchClientes();
     }
-    if(window.location.pathname === "/Facturas"){
+    if (window.location.pathname === "/Facturas") {
         fetchFacturas();
     }
-    if(window.location.pathname === "/Productos"){
+    if (window.location.pathname === "/Productos") {
         fetchProdutos();
     }
-    if(window.location.pathname === "/Proveedores"){
+    if (window.location.pathname === "/Proveedores") {
         fetchClientes();
     }
-    if(window.location.pathname === "Administracion"){
+    if (window.location.pathname === "Administracion") {
         fetchUsuarios();
     }
 
@@ -253,47 +255,49 @@ document.addEventListener('DOMContentLoaded', function(){
     //formularios
     //formulario de nuevo cliente
     const formularioCliente = document.getElementById('formularioCliente');
-    if(formularioCliente){
-        formularioCliente.addEventListener('submit', function(event){
+    if (formularioCliente) {
+        formularioCliente.addEventListener('submit', function (event) {
             event.preventDefault();
             const nombre = document.getElementById('nombre').value;
             const correo = document.getElementById('correo').value;
             const tipo_cedula = document.getElementById('tipo_cedula').value;
-            guardarCliente({nombre,correo,tipo_cedula});
+            guardarCliente({nombre, correo, tipo_cedula});
         })
     }
 
     //formulario de nuevo producto
     const formularioProductos = document.getElementById('formularioProductos');
-    if(formularioProductos){
-        formularioProductos.addEventListener('submit', function(event){
+    if (formularioProductos) {
+        formularioProductos.addEventListener('submit', function (event) {
             event.preventDefault();
             const descripcion = document.getElementById('descripcion').value;
             const cantidad = document.getElementById('cantidad').value;
-            guardarProducto({descripcion,cantidad});
+            guardarProducto({descripcion, cantidad});
         })
     }
 
     //formulario de nueva factura
     const formularioFacturas = document.getElementById('formularioFacturas');
-    if(formularioFacturas){
-        formularioFacturas.addEventListener('submit', function(event){
+    if (formularioFacturas) {
+        formularioFacturas.addEventListener('submit', function (event) {
             event.preventDefault();
             const cliente = document.getElementById('cliente').value;
             const email = document.getElementById('correo').value;
-            guardarFactura({cliente,email});
+            guardarFactura({cliente, email});
         })
     }
 
     //formulario de nuevo usuario
     const formularioUsuario = document.getElementById('formularioUsuario');
-    if(formularioUsuario){
-        formularioUsuario.addEventListener('submit', function(event){
+    if (formularioUsuario) {
+        formularioUsuario.addEventListener('submit', function (event) {
             event.preventDefault();
             const nombre = document.getElementById('nombre').value;
-            const contrasena = document.getElementById('clave');
-            const correo = document.getElementById('correo').value;
-            guardarUsuario({nombre,correo,contrasena});
+            const contrasena = document.getElementById('clave').value;
+            const email = document.getElementById('email').value;
+            const estado = false;
+            const id = 0;
+            guardarUsuario({id, nombre, email, contrasena, estado});
         })
     }
 
