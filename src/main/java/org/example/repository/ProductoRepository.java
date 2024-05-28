@@ -9,17 +9,17 @@ import java.util.List;
 
 @Repository
 public class ProductoRepository {
-    private List<Producto> productos;
+    private final Logic logic;
 
     @Autowired
     public ProductoRepository(Logic logic) {
-        this.productos = logic.getListaProductos();
+        this.logic = logic;
     }
     public List<Producto> findAll() {
-        return productos;
+        return logic.getListaProductos();
     }
 
     public void save(Producto nUsuario) {
-        productos.add(nUsuario);
+        logic.salvarProducto(nUsuario);
     }
 }

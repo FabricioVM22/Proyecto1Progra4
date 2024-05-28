@@ -9,17 +9,18 @@ import java.util.List;
 
 @Repository
 public class FacturaRepository {
-    private List<Factura> facturas;
+    private final Logic logic;
 
     @Autowired
     public FacturaRepository(Logic logic) {
-        this.facturas = logic.getListaFacturas();
+        this.logic= logic;
+
     }
     public List<Factura> findAll() {
-        return facturas;
+        return logic.getListaFacturas();
     }
 
     public void save(Factura nUsuario) {
-        facturas.add(nUsuario);
+        logic.salvarFactura(nUsuario);
     }
 }

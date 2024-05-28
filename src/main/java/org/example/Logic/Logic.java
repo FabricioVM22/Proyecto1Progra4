@@ -38,4 +38,21 @@ public class Logic {
     public List<Usuario> getListaUsuarios() {
         return (List<Usuario>) listaUsuarios.findAll();
     }
+
+    public void salvarCliente(Cliente cliente) {
+        listaClientes.save(cliente);
+    }
+
+    public void salvarFactura(Factura factura) {
+        listaFacturas.save(factura);
+    }
+
+    public void salvarProducto(Producto producto) {
+        listaProductos.save(producto);
+    }
+
+    public void salvarUsuario(Usuario usuario) {
+        listaUsuarios.save(usuario);
+    }
+
 }

@@ -9,16 +9,18 @@ import java.util.List;
 
 @Repository
 public class ClienteRepository {
-    private List<Cliente> clientes;
+    private final Logic logic;  // Declarar la instancia de Logic
+
     @Autowired
     public ClienteRepository(Logic logic) {
-        this.clientes = logic.getListaClientes();
+        this.logic = logic;  // Inicializar la instancia de Logic
     }
+
     public List<Cliente> findAll() {
-        return clientes;
+        return logic.getListaClientes();
     }
 
     public void save(Cliente nUsuario) {
-        clientes.add(nUsuario);
+        logic.salvarCliente(nUsuario);  // Llamar a un método de la instancia Logic
     }
 }

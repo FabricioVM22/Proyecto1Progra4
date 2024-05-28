@@ -9,18 +9,17 @@ import java.util.List;
 
 @Repository
 public class UsuarioRepository {
-    private List<Usuario> usuarios;
-
+    private final Logic logic;
     @Autowired
     public UsuarioRepository(Logic logic) {
-        this.usuarios = logic.getListaUsuarios();
+        this.logic = logic;
     }
 
     public List<Usuario> findAll() {
-        return usuarios;
+        return logic.getListaUsuarios();
     }
 
     public void save(Usuario nUsuario) {
-        usuarios.add(nUsuario);
+        logic.salvarUsuario(nUsuario);
     }
 }
