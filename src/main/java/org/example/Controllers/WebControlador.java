@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -123,16 +124,16 @@ public class WebControlador {
 
     //carga del login y validación
     @PostMapping(path = "/login")
-    public String login(@RequestParam("usuario") String usuarioNombre, @RequestParam("clave") String clave, Model model) {
+    public String login(@RequestBody Usuario usuarioR, Model model) {
         Usuario nUsuario = new Usuario();
         try {
             Iterable<Usuario> usuarios = usuarioRepository.findAll();
             for (Usuario usuario : usuarios) {
-                if (usuario.getNombre().equals(usuarioNombre)) {
+                if (usuario.getNombre().equals(usuarioR.getNombre())) {
                     nUsuario = usuario;
                 }
             }
-            if (nUsuario.getContrasena().equals(clave) && nUsuario.getEstado()) {
+            if (nUsuario.getContrasena().equals(usuarioR.getContrasena()) && nUsuario.getEstado()) {
                 model.addAttribute("usuario", nUsuario);
                 usuarioActual = nUsuario;
                 base(model);

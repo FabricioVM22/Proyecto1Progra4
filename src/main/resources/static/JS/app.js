@@ -282,10 +282,15 @@ function fetchAdministrador(ID) {
         .catch(error => console.error("Error al obtener usuarios:", error));
 }
 function fetchPerfil() {
-    const PerfilNombre = document.getElementById('Perfil-Nombre')
-    const PerfilEmail = document.getElementById('Perfil-Email');
+    const DetallesProveedor = document.getElementById('Detalles-Proveedor');
+    const PerfilNombre = document.createElement("h2");
+    const PerfilEmail = document.createElement("h2")
     PerfilNombre.innerHTML = nombreUsarioActivo;
     PerfilEmail.innerHTML = correoUsuarioActivo;
+    DetallesProveedor.appendChild(PerfilNombre);
+    DetallesProveedor.appendChild(document.createElement("br"));
+    DetallesProveedor.appendChild(PerfilEmail);
+
 }
 var nombreUsarioActivo;
 var correoUsuarioActivo;
