@@ -110,7 +110,27 @@ function guardarFactura(Factura) {
         })
         .catch(error => console.error("Error al guardar la factura: ", error));
 }
-
+function Login(Usuario) {
+    fetch("/login", { //Primero determinamos el repositorio de datos al cual nos vamos a conectar
+        method: "POST", //Configuramos la acción HTTP que nos va a permitir ejecutar el proceso
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(Usuario) //Convertimos el usuario que obtuvimos desde el formulario a Json para poder enviarlo al servicio Rest
+    })
+        .then(response => {
+            if (response.ok) //Respuesta positiva
+            { //Si la respuesta es positiva, quiere decir que se almacenó el producto
+                console.log("Inicio de sesion correcto"); //Notificamos
+                window.location.href = "/Perfil"; //Redireccionamos a la lista de productos
+            } else //Cualquier otra cosa va a ser un error
+            {
+                alert("Error al iniciar sesion");
+                throw new Error("Error al guardar la factura");
+            }
+        })
+        .catch(error => console.error("Error al guardar la factura: ", error));
+}
 //funciones para cargar las tablas
 function fetchClientes() {
     fetch("/api/clientes")
@@ -229,10 +249,62 @@ function fetchUsuarios() {
     })
         .catch(error => console.error("Error al obtener usuarios:", error));
 }
+function fetchProveedor(nombre) {
+    fetch("/api/usuarios")
+        .then(response => response.json()).then(usuarios => {
 
-
+        usuarios.forEach(usuario => {
+            if (usuario.nombre === nombre){
+                nombreUsarioActivo = usuario.nombre;
+                correoUsuarioActivo = usuario.email;
+                idUsuarioActivo = usuario.id;
+            }
+        });
+    })
+        .catch(error => console.error("Error al obtener usuarios:", error));
+}
+function fetchAdministrador(ID) {
+    fetch("/api/usuarios")
+        .then(response => response.json()).then(usuarios => {
+        usuarios.forEach(usuario => {
+            if (ID === usuario.id){
+                if (usuario.id === 1){
+                    const Nav = document.getElementById("nav");
+                    const Administracion = document.createElement("tr");
+                    Administracion.innerHTML = `
+                    <li><a href="/Administracion">Administracion</a></li>
+                    `;
+                    Nav.appendChild(Administracion);
+                }
+            }
+        });
+    })
+        .catch(error => console.error("Error al obtener usuarios:", error));
+}
+function fetchPerfil() {
+    const PerfilNombre = document.getElementById('Perfil-Nombre')
+    const PerfilEmail = document.getElementById('Perfil-Email');
+    PerfilNombre.innerHTML = nombreUsarioActivo;
+    PerfilEmail.innerHTML = correoUsuarioActivo;
+}
+var nombreUsarioActivo;
+var correoUsuarioActivo;
+var idUsuarioActivo;
 //listener para los formularios (y otros para las tablas)
 document.addEventListener('DOMContentLoaded', function () {
+
+    const formularioLogin = document.getElementById('formularioLogin');
+    if (formularioLogin){
+        formularioLogin.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const contrasena = document.getElementById('contrasena').value;
+            Login({nombre,contrasena});
+            fetchProveedor(nombre);
+            fetchAdministrador(idUsuarioActivo);
+
+        })
+    }
     //cargar listas de páginas
 
     if (window.location.pathname === "/Clientes") {
@@ -250,7 +322,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (window.location.pathname === "Administracion") {
         fetchUsuarios();
     }
-
+    if (window.location.pathname === "/Perfil") {
+        fetchPerfil();
+    }
 
     //formularios
     //formulario de nuevo cliente

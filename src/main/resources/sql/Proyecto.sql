@@ -30,6 +30,6 @@ create table factura
 );
 
 insert into usuario(id,nombre,email,contrasena,estado)values(1,'admin','admin','admin',true);
-insert into cliente(cedula,nombre,tipo_cedula,correo)values(18620,'Carlos','nacional','carlitos@gmail.com');
+insert into cliente(cedula,nombre,tipo_cedula,email)values(18620,'Carlos','nacional','carlitos@gmail.com');
 insert into producto(num_producto,descripcion,cantidad)values(1,'Natilla',50);
 insert into factura(num_factura,cliente,email)values(1,'Carlos','carlitos@gmail.com');
