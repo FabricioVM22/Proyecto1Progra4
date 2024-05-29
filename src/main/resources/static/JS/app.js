@@ -153,7 +153,7 @@ function fetchClientes() {
                 const fila = document.createElement("tr");
                 fila.innerHTML = `
                     <td>${cliente.nombre}</td>
-                    <td>${cliente.correo}</td>
+                    <td>${cliente.email}</td>
                     <td>${cliente.cedula}</td>
                 `;
                 tablaClientes.appendChild(fila);
@@ -308,7 +308,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (window.location.pathname === "/Proveedores") {
         fetchClientes();
     }
-    if (window.location.pathname === "Administracion") {
+    if (window.location.pathname === "/Administracion") {
+        fetchUsuarios();
+    }
+    if (window.location.pathname === "/AdministrarProveedores") {
         fetchUsuarios();
     }
     if (window.location.pathname === "/Perfil") {

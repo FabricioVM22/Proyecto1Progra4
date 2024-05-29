@@ -11,20 +11,8 @@
 <div class="container">
     <h1>Lista de Proveedores</h1>
     <form action="/actualizarUsuarios" method="post">
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Contraseña</th>
-                <th>Estado</th>
-            </tr>
-<!--            <tr th:each="usuario : ${usuarios}">
-                <td th:text="${usuario.id}"></td>
-                <td th:text="${usuario.nombre}"></td>
-                <td th:text="${usuario.email}"></td>
-                <td th:text="${usuario.contrasena}"></td>
-                <td><select id="estadoUsuario" name="estadoUsuario">
+        <table id="tabla-usuarios">
+<!-- <td><select id="estadoUsuario" name="estadoUsuario">
                     <option value="true">Activa</option>
                     <option value="false">Desactiva</option>
                 </select>

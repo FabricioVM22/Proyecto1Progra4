@@ -19,7 +19,7 @@ public class FacturaController {
 
     @GetMapping
     public List<Factura> getAllFacturas() {
-        return (List<Factura>) facturaRepository.findAll();
+        return facturaRepository.findAll();
     }
 
     @PostMapping
