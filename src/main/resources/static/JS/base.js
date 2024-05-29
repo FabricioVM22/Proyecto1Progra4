@@ -12,12 +12,11 @@ const headerContent = `
 const navContent = `
 <nav>
     <div class="container">
-        <ul>
+        <ul  id="nav-container">
             <li><a href="/Perfil">Perfil</a></li>
             <li><a href="/Clientes">Registrar Clientes</a></li>
             <li><a href="/Productos">Registrar Productos</a></li>
             <li><a href="/Facturas">Facturar</a></li>
-            <li><a href="/">Log Out</a></li>
         </ul>
     </div>
 </nav>
@@ -41,5 +40,19 @@ function loadContent(id, content) {
 document.addEventListener('DOMContentLoaded', () => {
     loadContent('header', headerContent);
     loadContent('nav', navContent);
+    const Nav = document.getElementById('nav-container');
+    if (sessionStorage.getItem('idUsuarioActivo') === "1") {
+        const Administracion = document.createElement("li");
+        Administracion.innerHTML = `
+                    <a href="/Administracion">Administracion</a>
+                    `;
+        Nav.appendChild(Administracion);
+    }
+    const logout = document.createElement("li");
+
+    logout.innerHTML = `
+                    <a href="/">Log Out</a>
+                    `;
+    Nav.appendChild(logout);
     loadContent('footer', footerContent);
 });

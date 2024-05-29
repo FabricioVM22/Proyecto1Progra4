@@ -255,27 +255,16 @@ function fetchProveedor(nombre) {
 
         usuarios.forEach(usuario => {
             if (usuario.nombre === nombre){
+                var nombreUsarioActivo;
+                var correoUsuarioActivo;
+                var idUsuarioActivo;
                 nombreUsarioActivo = usuario.nombre;
                 correoUsuarioActivo = usuario.email;
                 idUsuarioActivo = usuario.id;
-            }
-        });
-    })
-        .catch(error => console.error("Error al obtener usuarios:", error));
-}
-function fetchAdministrador(ID) {
-    fetch("/api/usuarios")
-        .then(response => response.json()).then(usuarios => {
-        usuarios.forEach(usuario => {
-            if (ID === usuario.id){
-                if (usuario.id === 1){
-                    const Nav = document.getElementById("nav");
-                    const Administracion = document.createElement("tr");
-                    Administracion.innerHTML = `
-                    <li><a href="/Administracion">Administracion</a></li>
-                    `;
-                    Nav.appendChild(Administracion);
-                }
+                sessionStorage.setItem('nombreUsuarioActivo',nombreUsarioActivo);
+                sessionStorage.setItem('correoUsuarioActivo',correoUsuarioActivo);
+                sessionStorage.setItem('idUsuarioActivo',idUsuarioActivo);
+
             }
         });
     })
@@ -285,16 +274,13 @@ function fetchPerfil() {
     const DetallesProveedor = document.getElementById('Detalles-Proveedor');
     const PerfilNombre = document.createElement("h2");
     const PerfilEmail = document.createElement("h2")
-    PerfilNombre.innerHTML = nombreUsarioActivo;
-    PerfilEmail.innerHTML = correoUsuarioActivo;
+    PerfilNombre.innerHTML = sessionStorage.getItem('nombreUsuarioActivo');
+    PerfilEmail.innerHTML = sessionStorage.getItem('correoUsuarioActivo');
     DetallesProveedor.appendChild(PerfilNombre);
     DetallesProveedor.appendChild(document.createElement("br"));
     DetallesProveedor.appendChild(PerfilEmail);
 
 }
-var nombreUsarioActivo;
-var correoUsuarioActivo;
-var idUsuarioActivo;
 //listener para los formularios (y otros para las tablas)
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -306,8 +292,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const contrasena = document.getElementById('contrasena').value;
             Login({nombre,contrasena});
             fetchProveedor(nombre);
-            fetchAdministrador(idUsuarioActivo);
-
         })
     }
     //cargar listas de páginas
