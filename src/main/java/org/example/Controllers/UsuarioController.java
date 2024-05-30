@@ -5,6 +5,7 @@ import org.example.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -27,4 +28,10 @@ public class UsuarioController {
         usuarioRepository.save(usuario);
     }
 
+    @PutMapping("/{id}")
+    public void updateUsuarioEstado(@PathVariable int id, @RequestBody boolean estado) {
+        Usuario usuario = usuarioRepository.findById(id);
+            usuario.setEstado(estado); // Asumiendo que Usuario tiene un método setEstado
+            usuarioRepository.save(usuario);
+    }
 }

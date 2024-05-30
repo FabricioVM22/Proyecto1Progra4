@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UsuarioRepository {
@@ -22,4 +23,6 @@ public class UsuarioRepository {
     public void save(Usuario nUsuario) {
         logic.salvarUsuario(nUsuario);
     }
+
+    public Usuario findById(int id) { return logic.getUsuarioById(id); }
 }

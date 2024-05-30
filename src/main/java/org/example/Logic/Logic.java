@@ -55,4 +55,9 @@ public class Logic {
         listaUsuarios.save(usuario);
     }
 
+    public Usuario getUsuarioById(int id) {
+        if(!listaUsuarios.findById(id).isEmpty()){
+            return listaUsuarios.findById(id).get();
+        }else return null;
+    }
 }

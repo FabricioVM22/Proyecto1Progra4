@@ -131,6 +131,8 @@ function Login(Usuario) {
         })
         .catch(error => console.error("Error al guardar la factura: ", error));
 }
+
+
 //funciones para cargar las tablas
 function fetchClientes() {
     fetch("/api/clientes")
@@ -217,33 +219,76 @@ function fetchProdutos() {
         .catch(error => console.error("Error al obtener productos:", error));
 }
 function fetchUsuarios() {
-    fetch("/api/usuarios")
+    fetch('/api/usuarios')
         .then(response => response.json()).then(usuarios => {
-        const TablaUsuarios = document.getElementById("tabla-usuarios");
-        TablaUsuarios.innerHTML = "";
-        const encabezado = document.createElement("tr");
-        encabezado.innerHTML = `
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Contraseña</th>
-                <th>Estado</th>
-            `;
-        TablaUsuarios.appendChild(encabezado);
-        //llenar tablas
+            const tablaUsuarios = document.getElementById('tabla-usuarios');
+            tablaUsuarios.innerHTML = "";
 
-        usuarios.forEach(usuario => {
-            const fila = document.createElement("tr");
-            fila.innerHTML = `
-                <td ${usuario.id}></td>
-                <td ${usuario.nombre}></td>
-                <td ${usuario.email}></td>
-                <td ${usuario.contrasena}></td>
-                <td ${usuario.estado}></td>
-               `;
-            TablaUsuarios.appendChild(fila);
-        });
-    })
+            //crear fila de encabezados
+            const encabezado = document.createElement("tr");
+            encabezado.innerHTML = `
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo electrónico</th>
+            <th>Estado del usuario</th>
+        `;
+            tablaUsuarios.appendChild(encabezado);
+            //lenar las tablas
+            usuarios.forEach(usuario => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${usuario.id}</td>
+                    <td>${usuario.nombre}</td>
+                    <td>${usuario.email}</td>
+                    <td>${usuario.estado === 'true' ? 'Activo' : 'Inactivo'}</td>
+                `;
+                tablaUsuarios.appendChild(fila);
+            });
+
+            console.log('Tabla de solo estado actualizada');
+        })
+        .catch(error => console.error("Error al obtener usuarios:", error));
+}
+function fetchUsuarioMD() {
+    fetch('/api/usuarios')
+        .then(response => response.json())
+        .then(usuarios => {
+            const tablaUsuarios = document.getElementById('tabla-usuarios-editable');
+            tablaUsuarios.innerHTML = "";
+            const encabezado = document.createElement("tr");
+            encabezado.innerHTML = `
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo electrónico</th>
+            <th>Estado del usuario</th>
+            `
+            tablaUsuarios.appendChild(encabezado);
+
+            //llenar las tablas
+            usuarios.forEach(usuario => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${usuario.id}</td>
+                    <td>${usuario.nombre}</td>
+                    <td>${usuario.email}</td>
+                    <td>
+                        <select data-user-id="${usuario.id}">
+                            <option value="true" ${usuario.estado === 'true' ? 'selected' : ''}>Activo</option>
+                            <option value="false" ${usuario.estado === 'false' ? 'selected' : ''}>Inactivo</option>
+                        </select>
+                    </td>
+                `;
+                tablaUsuarios.appendChild(fila);
+
+                // Añadir evento change al select
+                const select = fila.querySelector('select');
+                select.addEventListener('change', (event) => {
+                    cambiarEstadoUsuario(event.target.dataset.userId, event.target.value);
+                });
+            });
+
+            console.log('Tabla editable actualizada');
+        })
         .catch(error => console.error("Error al obtener usuarios:", error));
 }
 function fetchProveedor(nombre) {
@@ -278,6 +323,34 @@ function fetchPerfil() {
     DetallesProveedor.appendChild(PerfilEmail);
 
 }
+
+//metodo para cambiar el estado de un usuario
+function cambiarEstadoUsuario(userId, nuevoEstado) {
+    console.log(`Cambiando estado del usuario con ID ${userId} a ${nuevoEstado}`);
+
+    // Actualizar el estado en el DOM
+    const fila = document.querySelector(`select[data-user-id="${userId}"]`).closest('tr');
+    fila.querySelector('td:nth-child(5)').innerText = nuevoEstado === 'true' ? 'Activo' : 'Inactivo';
+
+    // Enviar la actualización al servidor
+    fetch(`/api/usuarios/${userId}/estado`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ estado: nuevoEstado === 'true' })
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la actualización del estado del usuario');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Estado del usuario actualizado en el servidor:', data);
+        })
+        .catch(error => console.error('Error al actualizar el estado del usuario:', error));
+}
 //listener para los formularios (y otros para las tablas)
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -309,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function () {
         fetchUsuarios();
     }
     if (window.location.pathname === "/AdministrarProveedores") {
-        fetchUsuarios();
+        fetchUsuarioMD();
     }
     if (window.location.pathname === "/Perfil") {
         fetchPerfil();
