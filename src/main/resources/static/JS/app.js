@@ -273,8 +273,8 @@ function fetchUsuarioMD() {
                     <td>${usuario.email}</td>
                     <td>
                         <select data-user-id="${usuario.id}">
-                            <option value="true" ${usuario.estado === 'true' ? 'selected' : ''}>Activo</option>
-                            <option value="false" ${usuario.estado === 'false' ? 'selected' : ''}>Inactivo</option>
+                            <option value="true" ${usuario.estado === true ? 'selected' : ''}>Activo</option>
+                            <option value="false" ${usuario.estado === false ? 'selected' : ''}>Inactivo</option>
                         </select>
                     </td>
                 `;
@@ -330,26 +330,31 @@ function cambiarEstadoUsuario(userId, nuevoEstado) {
 
     // Actualizar el estado en el DOM
     const fila = document.querySelector(`select[data-user-id="${userId}"]`).closest('tr');
-    fila.querySelector('td:nth-child(5)').innerText = nuevoEstado === 'true' ? 'Activo' : 'Inactivo';
+    //fila.querySelector('td:nth-child(4)').innerText = nuevoEstado === true ? 'Activo' : 'Inactivo';
 
     // Enviar la actualización al servidor
-    fetch(`/api/usuarios/${userId}/estado`, {
+    fetch('/api/usuarios/' + userId, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ estado: nuevoEstado === 'true' })
+        body: JSON.stringify({ nuevoEstado }),
     })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Error en la actualización del estado del usuario');
+                throw new Error('Error al actualizar el estado del usuario');
             }
+
             return response.json();
         })
         .then(data => {
             console.log('Estado del usuario actualizado en el servidor:', data);
+            // Actualizar la interfaz de usuario en consecuencia
         })
-        .catch(error => console.error('Error al actualizar el estado del usuario:', error));
+        .catch(error => {
+            console.error('Error al actualizar el estado del usuario:', error);
+        });
+
 }
 //listener para los formularios (y otros para las tablas)
 document.addEventListener('DOMContentLoaded', function () {
