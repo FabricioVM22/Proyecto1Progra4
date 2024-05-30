@@ -240,7 +240,7 @@ function fetchUsuarios() {
                     <td>${usuario.id}</td>
                     <td>${usuario.nombre}</td>
                     <td>${usuario.email}</td>
-                    <td>${usuario.estado === 'true' ? 'Activo' : 'Inactivo'}</td>
+                    <td>${usuario.estado === true ? 'Activo' : 'Inactivo'}</td>
                 `;
                 tablaUsuarios.appendChild(fila);
             });
