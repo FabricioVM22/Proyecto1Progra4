@@ -12,7 +12,7 @@ public class Cliente {
     private Integer cedula;
     private String nombre;
     private String tipo_cedula;
-    private String correo;
+    private String email;
 
     public Integer getCedula() {
         return cedula;
@@ -38,11 +38,11 @@ public class Cliente {
         this.tipo_cedula = tipo_cedula;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -161,7 +161,6 @@ function fetchClientes() {
         })
         .catch(error => console.error("Error al obtener clientes:", error));
 }
-
 function fetchFacturas() {
     fetch("/api/facturas")
         .then(response => response.json()).then(facturas => {
@@ -190,7 +189,6 @@ function fetchFacturas() {
     })
         .catch(error => console.error("Error al obtener facturas:", error));
 }
-
 function fetchProdutos() {
     fetch("/api/productos")
         .then(response => response.json()).then(productos => {
@@ -218,7 +216,6 @@ function fetchProdutos() {
     })
         .catch(error => console.error("Error al obtener productos:", error));
 }
-
 function fetchUsuarios() {
     fetch("/api/usuarios")
         .then(response => response.json()).then(usuarios => {
@@ -325,9 +322,9 @@ document.addEventListener('DOMContentLoaded', function () {
         formularioCliente.addEventListener('submit', function (event) {
             event.preventDefault();
             const nombre = document.getElementById('nombre').value;
-            const correo = document.getElementById('correo').value;
+            const email = document.getElementById('email').value;
             const tipo_cedula = document.getElementById('tipo_cedula').value;
-            guardarCliente({nombre, correo, tipo_cedula});
+            guardarCliente({nombre, email, tipo_cedula});
         })
     }
 
@@ -348,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function () {
         formularioFacturas.addEventListener('submit', function (event) {
             event.preventDefault();
             const cliente = document.getElementById('cliente').value;
-            const email = document.getElementById('correo').value;
+            const email = document.getElementById('email').value;
             guardarFactura({cliente, email});
         })
     }
